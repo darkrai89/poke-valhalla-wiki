@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Wiki Poké Valhalla</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #080d14;
+      color: #e8edf2;
+    }
+
+    /* TOPO */
+    header {
+      background: #0d1520;
+      border-bottom: 1px solid #24364a;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #e8c36a;
+    }
+
+    .logo span {
+      color: #61c7ff;
+    }
+
+    .search {
+      width: 420px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #30465d;
+      background: #111c29;
+      color: white;
+      outline: none;
+    }
+
+    /* CONTEÚDO */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 50px 25px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 55px 20px;
+      background: linear-gradient(135deg, #101d2b, #0b111a);
+      border: 1px solid #26394d;
+      border-radius: 14px;
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      color: #e8c36a;
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: #aab8c5;
+      font-size: 17px;
+    }
+
+    /* CATEGORIAS */
+    .title {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: #101923;
+      border: 1px solid #25384b;
+      border-radius: 10px;
+      padding: 25px;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #d2ad56;
+      background: #142231;
+    }
+
+    .card h3 {
+      color: #67caff;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #9ba9b6;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid #1d2b39;
+      color: #66798b;
+    }
+
+    @media(max-width: 700px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .search {
+        width: 100%;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">POKÉ <span>VALHALLA</span></div>
+
+  <input
+    class="search"
+    type="text"
+    placeholder="Pesquisar na Wiki..."
+  >
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <h1>Wiki Poké Valhalla</h1>
+
+    <p>
+      Seu guia para explorar o mundo de Valhalla.
+      Descubra Pokémon, quests, bosses, sistemas,
+      mapas e muito mais.
+    </p>
+  </section>
+
+  <h2 class="title">Explore Valhalla</h2>
+
+  <section class="grid">
+
+    <div class="card">
+      <h3>📖 Pokédex</h3>
+      <p>
+        Informações sobre Pokémon, evoluções,
+        habilidades, localizações e muito mais.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🗺️ Mapas</h3>
+      <p>
+        Conheça cidades, regiões, hunts
+        e locais importantes.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>⚔️ Hunts</h3>
+      <p>
+        Encontre os melhores locais para evoluir
+        e descobrir novos Pokémon.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>👹 Bosses</h3>
+      <p>
+        Bosses diários, requisitos,
+        recompensas e estratégias.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>📜 Quests</h3>
+      <p>
+        Descubra missões, requisitos
+        e recompensas disponíveis.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>💎 Itens</h3>
+      <p>
+        Drops, materiais, equipamentos,
+        stones e itens especiais.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>✨ Shiny</h3>
+      <p>
+        Conheça a mecânica Shiny
+        exclusiva do Poké Valhalla.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>⚙️ Sistemas</h3>
+      <p>
+        Todos os sistemas e mecânicas
+        importantes do servidor.
+      </p>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  Poké Valhalla Wiki • Em desenvolvimento
+</footer>
+
+</body>
+</html>
