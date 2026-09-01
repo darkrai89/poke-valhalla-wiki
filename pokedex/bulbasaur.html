@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bulbasaur | Pokédex Valhalla</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#05090f;
+  --panel:#0b141f;
+  --panel2:#101c29;
+  --border:#263b50;
+  --blue:#29b6ff;
+  --gold:#e2b85a;
+  --text:#e7eef4;
+  --muted:#8da1b2;
+  --green:#56c271;
+  --purple:#a678d4;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 50% 0%,#10243d 0%,#07111d 30%,#05090f 68%);
+  color:var(--text);
+  min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+  height:78px;
+  background:#050a11;
+  border-bottom:1px solid #23374b;
+  display:flex;
+  align-items:center;
+  padding:0 35px;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+
+.brand img{
+  width:54px;
+  height:54px;
+  object-fit:contain;
+}
+
+.brand strong{
+  color:white;
+  font-size:18px;
+}
+
+.brand span{color:var(--blue)}
+
+nav{
+  margin-left:40px;
+  display:flex;
+  gap:24px;
+}
+
+nav a{
+  color:#a9b8c5;
+  text-decoration:none;
+  font-size:14px;
+}
+
+nav a:hover{color:var(--blue)}
+
+.search{
+  margin-left:auto;
+}
+
+.search input{
+  width:280px;
+  padding:11px 14px;
+  background:#0b1520;
+  border:1px solid #2b4257;
+  border-radius:7px;
+  color:white;
+  outline:none;
+}
+
+/* PAGE */
+
+.container{
+  width:94%;
+  max-width:1250px;
+  margin:auto;
+  padding:30px 0 70px;
+}
+
+.breadcrumb{
+  color:#70869a;
+  font-size:13px;
+  margin-bottom:22px;
+}
+
+.breadcrumb a{
+  color:var(--blue);
+  text-decoration:none;
+}
+
+/* HERO POKEMON */
+
+.pokemon-hero{
+  display:grid;
+  grid-template-columns:330px 1fr;
+  gap:25px;
+  margin-bottom:25px;
+}
+
+.pokemon-image{
+  min-height:330px;
+  background:
+    radial-gradient(circle,#174a48 0%,#0c2730 38%,#08121c 75%);
+  border:1px solid #285069;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.pokemon-image::after{
+  content:"#001";
+  position:absolute;
+  bottom:15px;
+  right:18px;
+  font-size:38px;
+  font-weight:bold;
+  color:rgba(255,255,255,.05);
+}
+
+.placeholder{
+  text-align:center;
+}
+
+.placeholder .symbol{
+  font-size:80px;
+}
+
+.placeholder small{
+  display:block;
+  color:#7590a2;
+  margin-top:15px;
+}
+
+.pokemon-info{
+  background:linear-gradient(145deg,#0d1824,#09121c);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:30px;
+}
+
+.number{
+  color:#668198;
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+.pokemon-info h1{
+  font-size:40px;
+  margin-bottom:12px;
+}
+
+.types{
+  display:flex;
+  gap:8px;
+  margin-bottom:22px;
+}
+
+.type{
+  padding:7px 12px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.grass{
+  background:rgba(65,170,92,.16);
+  color:#79dd8f;
+  border:1px solid #357c49;
+}
+
+.poison{
+  background:rgba(155,91,190,.15);
+  color:#c397df;
+  border:1px solid #684184;
+}
+
+.description{
+  color:#9bafbf;
+  line-height:1.7;
+  margin-bottom:25px;
+}
+
+.basic-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.basic{
+  background:#09131e;
+  border:1px solid #20364a;
+  padding:13px;
+  border-radius:8px;
+}
+
+.basic small{
+  color:#6f879a;
+  display:block;
+  margin-bottom:6px;
+}
+
+.basic strong{
+  font-size:14px;
+}
+
+/* CONTENT */
+
+.content{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
+}
+
+.box{
+  background:#0a131e;
+  border:1px solid #22374b;
+  border-radius:11px;
+  padding:23px;
+  margin-bottom:20px;
+}
+
+.box h2{
+  font-size:19px;
+  margin-bottom:18px;
+  padding-bottom:12px;
+  border-bottom:1px solid #1d3042;
+}
+
+.rows{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.row{
+  background:#0d1824;
+  border:1px solid #20364a;
+  border-radius:7px;
+  padding:13px;
+}
+
+.row small{
+  display:block;
+  color:#70869a;
+  margin-bottom:5px;
+}
+
+.pending{
+  color:#e2b85a;
+}
+
+/* EVOLUTION */
+
+.evolution{
+  display:flex;
+  align-items:center;
+  justify-content:space-around;
+  text-align:center;
+  gap:15px;
+}
+
+.evo{
+  flex:1;
+  background:#0d1824;
+  border:1px solid #22394e;
+  padding:18px;
+  border-radius:8px;
+}
+
+.evo-icon{
+  font-size:36px;
+  margin-bottom:8px;
+}
+
+.arrow{
+  color:#4cbcff;
+  font-size:24px;
+}
+
+/* SIDEBAR */
+
+.side-link{
+  display:block;
+  color:#9fb3c3;
+  text-decoration:none;
+  padding:12px 0;
+  border-bottom:1px solid #1b2d3e;
+}
+
+.side-link:hover{
+  color:var(--blue);
+}
+
+.warning{
+  border-left:3px solid var(--gold);
+  padding-left:13px;
+  color:#8fa3b3;
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* FOOTER */
+
+footer{
+  border-top:1px solid #1e3041;
+  padding:28px;
+  text-align:center;
+  color:#617789;
+  font-size:13px;
+}
+
+@media(max-width:850px){
+  nav{display:none}
+  .pokemon-hero{grid-template-columns:1fr}
+  .content{grid-template-columns:1fr}
+  .basic-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:550px){
+  header{
+    height:auto;
+    padding:12px;
+    flex-wrap:wrap;
+  }
+
+  .search{
+    width:100%;
+    margin-top:10px;
+  }
+
+  .search input{width:100%}
+
+  .rows{grid-template-columns:1fr}
+
+  .evolution{
+    flex-direction:column;
+  }
+
+  .arrow{
+    transform:rotate(90deg);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a class="brand" href="../index.html">
+<img src="../logo-valhalla.png.png" alt="Poké Valhalla">
+<strong>POKÉ <span>VALHALLA</span></strong>
+</a>
+
+<nav>
+<a href="../index.html">Início</a>
+<a href="index.html">Pokédex</a>
+<a href="#">Mapa</a>
+<a href="#">Sistemas</a>
+<a href="#">Quests</a>
+<a href="#">Guias</a>
+</nav>
+
+<div class="search">
+<input type="text" placeholder="Pesquisar na Wiki...">
+</div>
+
+</header>
+
+<main class="container">
+
+<div class="breadcrumb">
+<a href="../index.html">Início</a>
+&nbsp;›&nbsp;
+<a href="index.html">Pokédex</a>
+&nbsp;›&nbsp;
+Bulbasaur
+</div>
+
+<section class="pokemon-hero">
+
+<div class="pokemon-image">
+<div class="placeholder">
+<div class="symbol">🌱</div>
+<small>Sprite oficial do Valhalla será adicionado aqui</small>
+</div>
+</div>
+
+<div class="pokemon-info">
+
+<div class="number">POKÉDEX #001</div>
+
+<h1>Bulbasaur</h1>
+
+<div class="types">
+<span class="type grass">GRASS</span>
+<span class="type poison">POISON</span>
+</div>
+
+<p class="description">
+Página oficial de informações do Bulbasaur no Poké Valhalla.
+Os dados específicos do servidor serão adicionados conforme
+o balanceamento e as mecânicas oficiais forem definidos.
+</p>
+
+<div class="basic-grid">
+
+<div class="basic">
+<small>Categoria</small>
+<strong>Pokémon</strong>
+</div>
+
+<div class="basic">
+<small>Região</small>
+<strong>Kanto</strong>
+</div>
+
+<div class="basic">
+<small>Raridade</small>
+<strong class="pending">A definir</strong>
+</div>
+
+<div class="basic">
+<small>Shiny</small>
+<strong class="pending">A definir</strong>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div class="content">
+
+<div>
+
+<section class="box">
+
+<h2>⚔️ Informações de Gameplay</h2>
+
+<div class="rows">
+
+<div class="row">
+<small>Level recomendado</small>
+<strong class="pending">A definir</strong>
+</div>
+
+<div class="row">
+<small>Experiência</small>
+<strong class="pending">A definir</strong>
+</div>
+
+<div class="row">
+<small>Catch</small>
+<strong class="pending">A definir</strong>
+</div>
+
+<div class="row">
+<small>Preço / Valor</small>
+<strong class="pending">A definir</strong>
+</div>
+
+<div class="row">
+<small>Habitat</small>
+<strong class="pending">A definir</strong>
+</div>
+
+<div class="row">
+<small>Localização</small>
+<strong class="pending">A definir</strong>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="box">
+
+<h2>🧬 Evolução</h2>
+
+<div class="evolution">
+
+<div class="evo">
+<div class="evo-icon">🌱</div>
+<strong>Bulbasaur</strong>
+</div>
+
+<div class="arrow">→</div>
+
+<div class="evo">
+<div class="evo-icon">🌿</div>
+<strong>Ivysaur</strong>
+</div>
+
+<div class="arrow">→</div>
+
+<div class="evo">
+<div class="evo-icon">🌺</div>
+<strong>Venusaur</strong>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="box">
+
+<h2>✨ Habilidades</h2>
+
+<div class="rows">
+
+<div class="row">
+<small>Habilidades</small>
+<strong class="pending">A definir conforme o servidor</strong>
+</div>
+
+<div class="row">
+<small>Passiva</small>
+<strong class="pending">A definir</strong>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="box">
+
+<h2>💎 Drops</h2>
+
+<p class="warning">
+Os drops serão cadastrados somente após confirmarmos
+os valores e itens utilizados oficialmente no Poké Valhalla.
+</p>
+
+</section>
+
+</div>
+
+
+<aside>
+
+<section class="box">
+
+<h2>📌 Navegação</h2>
+
+<a class="side-link" href="index.html">← Voltar para Pokédex</a>
+<a class="side-link" href="#">Onde encontrar</a>
+<a class="side-link" href="#">Habilidades</a>
+<a class="side-link" href="#">Drops</a>
+<a class="side-link" href="#">Versão Shiny</a>
+
+</section>
+
+
+<section class="box">
+
+<h2>⚠️ Dados do Valhalla</h2>
+
+<p class="warning">
+Esta Wiki utilizará os dados do próprio Poké Valhalla.
+Informações de outros servidores não serão consideradas
+automaticamente como válidas.
+</p>
+
+</section>
+
+</aside>
+
+</div>
+
+</main>
+
+<footer>
+Poké Valhalla Wiki • Bulbasaur #001
+</footer>
+
+</body>
+</html>
