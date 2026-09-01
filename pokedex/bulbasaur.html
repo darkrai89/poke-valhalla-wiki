@@ -409,8 +409,18 @@ Bulbasaur
 <div class="pokemon-image">
 <div class="placeholder">
 <div class="symbol">
-<img src="../bulbasaur.png" alt="Bulbasaur" style="max-width:220px; max-height:220px; object-fit:contain;"></div>
-<small>Bulbasaur</small>
+    <img id="bulbasaurSprite" src="../bulbasaur.png" alt="Bulbasaur" style="max-width:220px; max-height:220px; object-fit:contain;">
+</div>
+
+<div style="margin-top:12px; display:flex; gap:8px; justify-content:center;">
+    <button type="button" onclick="document.getElementById('bulbasaurSprite').src='../bulbasaur.png'">
+        🌿 Normal
+    </button>
+
+    <button type="button" onclick="document.getElementById('bulbasaurSprite').src='../bulbasaur-shiny.png'">
+        ✨ Shiny
+    </button>
+</div>
 </div>
 </div>
 
