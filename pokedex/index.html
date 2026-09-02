@@ -341,8 +341,8 @@ footer{
   </div>
 
   <div class="counter">
-    Catálogo em desenvolvimento
-  </div>
+<span id="pokemonCounter">0 Pokémon encontrados</span>
+</div>
 </section>
 
 <section class="toolbar">
@@ -351,19 +351,27 @@ footer{
     <input id="searchPokemon" type="text" placeholder="Pesquisar Pokémon por nome...">
   </div>
 
-  <div class="filters">
-    <button class="filter active">Todos</button>
-    <button class="filter">Normal</button>
-    <button class="filter">Fire</button>
-    <button class="filter">Water</button>
-    <button class="filter">Grass</button>
-    <button class="filter">Electric</button>
-    <button class="filter">Psychic</button>
-    <button class="filter">Dark</button>
-    <button class="filter">Steel</button>
-    <button class="filter">Dragon</button>
-    <button class="filter">Ghost</button>
-  </div>
+<div class="filters">
+  <button class="filter active">Todos</button>
+  <button class="filter">Normal</button>
+  <button class="filter">Fire</button>
+  <button class="filter">Water</button>
+  <button class="filter">Electric</button>
+  <button class="filter">Grass</button>
+  <button class="filter">Ice</button>
+  <button class="filter">Fighting</button>
+  <button class="filter">Poison</button>
+  <button class="filter">Ground</button>
+  <button class="filter">Flying</button>
+  <button class="filter">Psychic</button>
+  <button class="filter">Bug</button>
+  <button class="filter">Rock</button>
+  <button class="filter">Ghost</button>
+  <button class="filter">Dragon</button>
+  <button class="filter">Dark</button>
+  <button class="filter">Steel</button>
+  <button class="filter">Fairy</button>
+</div>
 
 </section>
 
@@ -483,12 +491,12 @@ Poké Valhalla Wiki • Pokédex em desenvolvimento
 const search = document.getElementById("searchPokemon");
 const cards = document.querySelectorAll(".poke-card");
 const filters = document.querySelectorAll(".filter");
-
+const counter = document.getElementById("pokemonCounter");
 let activeType = "Todos";
 
 function filterPokemon() {
   const searchValue = search.value.toLowerCase();
-
+let visibleCount = 0;
   cards.forEach(card => {
     const name = card.dataset.name.toLowerCase();
 
@@ -500,15 +508,17 @@ function filterPokemon() {
     const matchesType =
       activeType === "Todos" ||
       types.includes(activeType);
-
-    if (matchesName && matchesType) {
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-  });
+if (matchesName && matchesType) {
+  card.style.display = "block";
+  visibleCount++;
+} else {
+  card.style.display = "none";
 }
 
+});
+
+counter.textContent = `${visibleCount} Pokémon encontrados`;
+}
 search.addEventListener("input", filterPokemon);
 
 filters.forEach(button => {
@@ -519,6 +529,8 @@ filters.forEach(button => {
     filterPokemon();
   });
 });
+
+  filterPokemon();
 </script>
 
 </body>
