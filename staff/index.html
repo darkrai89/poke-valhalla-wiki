@@ -214,6 +214,25 @@ nav a:hover{
   object-fit:contain;
   image-rendering:pixelated;
 }
+.staff-card-side{
+  position:relative;
+  padding-left:170px;
+  min-height:180px;
+}
+
+.staff-card-side .staff-outfit{
+  position:absolute;
+  left:25px;
+  top:50%;
+  transform:translateY(-50%);
+  margin:0;
+}
+
+.staff-card-side .staff-outfit img{
+  width:120px;
+  height:120px;
+}
+  
 
 
 .staff-outfit-duo{
@@ -421,7 +440,7 @@ footer{
 
   <section class="staff-grid">
 
-  <div class="staff-card">
+ <div class="staff-card staff-card-side">
    <div class="staff-icon staff-outfit">
   <img src="../outfit-adm.png" alt="Outfit Administração">
 </div>
