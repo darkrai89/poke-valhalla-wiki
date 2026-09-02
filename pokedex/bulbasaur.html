@@ -279,20 +279,26 @@ nav a:hover{color:var(--blue)}
 /* EVOLUTION */
 
 .evolution{
-  display:flex;
-  align-items:center;
-  justify-content:space-around;
-  text-align:center;
-  gap:15px;
-}
-
+    display:flex;
+    align-items:stretch;
+    justify-content:center;
+    text-align:center;
+    gap:14px;
+    flex-wrap:nowrap;
+    width:100%;
 .evo{
-  flex:1;
-  background:#0d1824;
-  border:1px solid #22394e;
-  padding:18px;
-  border-radius:8px;
+    flex:1 1 0;
+    min-width:0;
+    background:#0d1824;
+    border:1px solid #22394e;
+    padding:14px 8px;
+    border-radius:8px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 }
+  
 
 .evo-icon{
   font-size:36px;
