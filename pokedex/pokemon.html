@@ -248,6 +248,23 @@ footer{
     Carregando cadeia evolutiva...
   </div>
 </section>
+        <section class="box" id="catch">
+  <h2>🎯 Captura</h2>
+
+  <div class="rows">
+    <div class="row">
+      <small>Catch Chance</small>
+      <strong id="catchChance">—</strong>
+      <span>Valor configurado no servidor.</span>
+    </div>
+
+    <div class="row">
+      <small>Corpse ID</small>
+      <strong id="corpse">—</strong>
+      <span>ID utilizado pelo sistema de captura.</span>
+    </div>
+  </div>
+</section>
         <section class="box" id="moves">
           <h2>⚡ Moves</h2>
           <div id="movesList" class="moves"></div>
@@ -471,7 +488,8 @@ async function loadPokemon(){
       ["level","wildLvl","exp","agility","offense","defense",
        "specialattack","specialdefense","vitality"]
         .forEach(field => setValue(field, gameData[field]));
-
+setValue("catchChance", gameData.catchChance ?? "Não disponível");
+setValue("corpse", gameData.corpse ?? "Não disponível");
       const moves = Array.isArray(gameData.moves) ? gameData.moves : [];
 
       if(moves.length){
