@@ -248,6 +248,18 @@ footer{
     Carregando cadeia evolutiva...
   </div>
 </section>
+
+       <section class="box" id="gender">
+  <h2>⚥ Gênero</h2>
+
+  <div class="rows">
+    <div class="row">
+      <small>Distribuição</small>
+      <strong id="genderValue">—</strong>
+      <span id="genderDescription">Dados configurados no servidor.</span>
+    </div>
+  </div>
+</section> 
         <section class="box" id="catch">
   <h2>🎯 Captura</h2>
 
@@ -490,6 +502,24 @@ async function loadPokemon(){
         .forEach(field => setValue(field, gameData[field]));
 setValue("catchChance", gameData.catchChance ?? "Não disponível");
 setValue("corpse", gameData.corpse ?? "Não disponível");
+ if(gameData.gender !== undefined){
+  if(gameData.gender === -1){
+    setValue("genderValue", "Sem gênero");
+    el("genderDescription").textContent = "Este Pokémon não possui gênero.";
+  }else{
+    const male = gameData.gender / 10;
+    const female = 100 - male;
+
+    setValue(
+      "genderValue",
+      `♂ ${male.toFixed(1).replace(".", ",")}% | ♀ ${female.toFixed(1).replace(".", ",")}%`
+    );
+
+    el("genderDescription").textContent = "Distribuição de gênero configurada no servidor.";
+  }
+}else{
+  setValue("genderValue", "Não disponível");
+}     
       const moves = Array.isArray(gameData.moves) ? gameData.moves : [];
 
       if(moves.length){
