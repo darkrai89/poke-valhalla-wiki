@@ -324,6 +324,36 @@ margin:0 auto 15px;
 .recruitment-button:hover{
   filter:brightness(1.12);
 }
+/* BANNER DE RECRUTAMENTO */
+
+.recruitment-banner{
+  position:relative;
+  display:block;
+  padding:0;
+  overflow:hidden;
+  height:250px;
+  border-radius:14px;
+  background:#07111c;
+}
+
+.recruitment-banner-img{
+  position:absolute;
+  width:100%;
+  height:auto;
+  left:0;
+  top:50%;
+  transform:translateY(-50%);
+  display:block;
+}
+
+.recruitment-banner-button{
+  position:absolute;
+  right:35px;
+  bottom:25px;
+  z-index:2;
+  box-shadow:0 5px 20px rgba(0,0,0,.45);
+}
+  
 
 /* VALUES */
 
@@ -552,20 +582,15 @@ footer{
 </section>
 
 
-<section class="recruitment">
+<section class="recruitment recruitment-banner">
 
-  <div class="recruitment-text">
-    <small>Equipe Valhalla</small>
-    <h2>Quer fazer parte dessa história?</h2>
+  <img
+    src="../banner-recrutamento.png"
+    alt="Recrutamento Equipe Valhalla"
+    class="recruitment-banner-img"
+  >
 
-    <p>
-      Em determinados períodos, novas oportunidades podem surgir dentro
-      da equipe. Procuramos pessoas responsáveis, participativas e que
-      realmente conheçam a comunidade.
-    </p>
-  </div>
-
-  <a class="recruitment-button" href="inscricao.html">
+  <a class="recruitment-button recruitment-banner-button" href="inscricao.html">
     Ver oportunidades →
   </a>
 
