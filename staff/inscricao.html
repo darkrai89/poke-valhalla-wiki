@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Recrutamento Staff | Poké Valhalla</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --bg:#05090f;
+  --panel:#0c1520;
+  --border:#24384d;
+  --blue:#2bb8ff;
+  --text:#e6edf3;
+  --muted:#8fa2b2;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 50% 0%,#11243b 0%,#07111c 30%,#05090f 68%);
+  color:var(--text);
+  min-height:100vh;
+}
+
+header{
+  height:78px;
+  background:#050a11;
+  border-bottom:1px solid #23364a;
+  display:flex;
+  align-items:center;
+  padding:0 34px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+
+.brand img{
+  width:54px;
+  height:54px;
+  object-fit:contain;
+}
+
+.brand strong{
+  color:white;
+  font-size:18px;
+}
+
+.brand span{
+  color:var(--blue);
+}
+
+.back{
+  margin-left:auto;
+  color:#9eb0bf;
+  text-decoration:none;
+  border:1px solid #2b4257;
+  padding:9px 13px;
+  border-radius:7px;
+}
+
+.back:hover{
+  color:white;
+  border-color:var(--blue);
+}
+
+.container{
+  width:94%;
+  max-width:1000px;
+  margin:auto;
+  padding:45px 0 70px;
+}
+
+.hero{
+  text-align:center;
+  padding:45px 25px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(43,184,255,.15),transparent 55%),
+    linear-gradient(145deg,#0d1723,#08111b);
+  margin-bottom:30px;
+}
+
+.hero img{
+  width:105px;
+  height:105px;
+  object-fit:contain;
+  margin-bottom:15px;
+}
+
+.hero small{
+  color:var(--blue);
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.hero h1{
+  font-size:36px;
+  margin:10px 0;
+}
+
+.hero h1 span{
+  color:var(--blue);
+}
+
+.hero p{
+  max-width:680px;
+  margin:auto;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.status{
+  margin-bottom:30px;
+  padding:18px 22px;
+  background:#0a1722;
+  border:1px solid #21415b;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.status-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#35d07f;
+  box-shadow:0 0 12px #35d07f;
+}
+
+.status strong{
+  color:#64e49a;
+}
+
+.status span{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.box{
+  background:linear-gradient(145deg,#0d1723,#09111b);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:28px;
+  margin-bottom:22px;
+}
+
+.box h2{
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.box-subtitle{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:22px;
+}
+
+.vacancy{
+  display:flex;
+  align-items:center;
+  gap:25px;
+  background:#08131e;
+  border:1px solid #1d3a51;
+  border-radius:12px;
+  padding:22px;
+  margin-bottom:15px;
+}
+
+.vacancy-outfits{
+  width:250px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-shrink:0;
+}
+
+.vacancy-outfits img{
+  width:110px;
+  height:110px;
+  object-fit:contain;
+  image-rendering:pixelated;
+}
+
+.gm-placeholder{
+  width:250px;
+  text-align:center;
+  font-size:55px;
+  flex-shrink:0;
+}
+
+.vacancy-info{
+  flex:1;
+}
+
+.vacancy-info small{
+  color:var(--blue);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-weight:bold;
+}
+
+.vacancy-info h3{
+  font-size:24px;
+  margin:5px 0 8px;
+}
+
+.vacancy-info p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+}
+
+.requirements{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.requirement{
+  background:#08131e;
+  border:1px solid #1d3447;
+  border-radius:9px;
+  padding:16px;
+  color:#bac7d2;
+  font-size:14px;
+}
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.step{
+  background:#08131e;
+  border:1px solid #1d3447;
+  border-radius:10px;
+  padding:20px;
+}
+
+.step-number{
+  color:var(--blue);
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+.step h3{
+  margin:8px 0;
+  font-size:16px;
+}
+
+.step p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+}
+
+.form-group{
+  margin-bottom:20px;
+}
+
+.form-group label{
+  display:block;
+  margin-bottom:8px;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  padding:13px;
+  background:#07111a;
+  border:1px solid #294157;
+  border-radius:8px;
+  color:white;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:14px;
+  outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:var(--blue);
+}
+
+.form-group textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.notice{
+  background:rgba(43,184,255,.07);
+  border-left:3px solid var(--blue);
+  padding:15px;
+  margin:20px 0;
+  color:#aebdca;
+  font-size:13px;
+  line-height:1.6;
+}
+
+.submit-button{
+  width:100%;
+  border:0;
+  cursor:pointer;
+  padding:14px 20px;
+  border-radius:8px;
+  color:white;
+  font-weight:bold;
+  font-size:15px;
+  background:linear-gradient(135deg,#008cff,#0066dd);
+}
+
+.submit-button:hover{
+  filter:brightness(1.12);
+}
+
+footer{
+  border-top:1px solid #1d3042;
+  padding:28px;
+  text-align:center;
+  color:#65798a;
+  font-size:13px;
+}
+
+@media(max-width:700px){
+
+  header{
+    padding:12px;
+  }
+
+  .hero h1{
+    font-size:29px;
+  }
+
+  .requirements,
+  .steps,
+  .form-row{
+    grid-template-columns:1fr;
+  }
+
+  .vacancy{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .vacancy-outfits,
+  .gm-placeholder{
+    width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <a class="brand" href="../index.html">
+    <img src="../logo-valhalla.png" alt="Poké Valhalla">
+    <strong>POKÉ <span>VALHALLA</span></strong>
+  </a>
+
+  <a class="back" href="./">← Equipe Valhalla</a>
+
+</header>
+
+<main class="container">
+
+<section class="hero">
+
+  <img src="../icone-equipe-valhalla.png" alt="Equipe Valhalla">
+
+  <small>Recrutamento Staff</small>
+
+  <h1>Faça parte da <span>Equipe Valhalla</span></h1>
+
+  <p>
+    Procuramos pessoas responsáveis, participativas e dispostas a contribuir
+    com a comunidade. Se você acredita que pode ajudar na construção do
+    Poké Valhalla, essa pode ser a sua oportunidade.
+  </p>
+
+</section>
+
+<div class="status">
+
+  <div class="status-dot"></div>
+
+  <div>
+    <strong>Inscrições abertas</strong><br>
+    <span>Estamos recebendo candidaturas para integrar a Equipe Valhalla.</span>
+  </div>
+
+</div>
+
+<section class="box">
+
+  <h2>Vagas disponíveis</h2>
+
+  <p class="box-subtitle">
+    Confira as oportunidades disponíveis atualmente dentro da Equipe Valhalla.
+  </p>
+
+  <div class="vacancy">
+
+    <div class="vacancy-outfits">
+      <img src="../outfit-tutor-help-m.png" alt="Outfit Help Masculina">
+      <img src="../outfit-tutor-help-f.png" alt="Outfit Help Feminina">
+    </div>
+
+    <div class="vacancy-info">
+      <small>4 VAGAS DISPONÍVEIS</small>
+      <h3>Help</h3>
+
+      <p>
+        O Help representa um dos principais contatos entre a Staff e a comunidade.
+        Sua função é auxiliar jogadores, orientar dúvidas e contribuir para um
+        ambiente organizado, respeitoso e acolhedor.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="vacancy">
+
+    <div class="vacancy-outfits">
+      <img src="../outfit-tutor-help-m.png" alt="Outfit Tutor Masculina">
+      <img src="../outfit-tutor-help-f.png" alt="Outfit Tutor Feminina">
+    </div>
+
+    <div class="vacancy-info">
+      <small>OPORTUNIDADES DISPONÍVEIS</small>
+      <h3>Tutor</h3>
+
+      <p>
+        Buscamos jogadores experientes, responsáveis e com conhecimento do jogo.
+        A quantidade de novos Tutores poderá variar conforme a necessidade
+        e o crescimento da equipe.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="vacancy">
+
+    <div class="gm-placeholder">⚔️</div>
+
+    <div class="vacancy-info">
+      <small>2 VAGAS DISPONÍVEIS</small>
+      <h3>Game Master</h3>
+
+      <p>
+        Cargo voltado à organização do jogo, fiscalização, eventos e suporte
+        à comunidade. Os candidatos serão avaliados de acordo com a experiência,
+        postura e responsabilidade necessárias para a função.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="box">
+
+  <h2>Requisitos</h2>
+
+  <p class="box-subtitle">
+    Antes de enviar sua candidatura, confira alguns pontos importantes.
+  </p>
+
+  <div class="requirements">
+
+    <div class="requirement">🤝 Ter respeito e boa conduta com a comunidade.</div>
+    <div class="requirement">💬 Ter boa comunicação e disposição para ajudar.</div>
+    <div class="requirement">🎮 Conhecer o jogo e seus principais sistemas.</div>
+    <div class="requirement">⏰ Possuir disponibilidade para participar da equipe.</div>
+    <div class="requirement">⚖️ Saber agir com equilíbrio e imparcialidade.</div>
+    <div class="requirement">💙 Ter interesse verdadeiro em contribuir com o Poké Valhalla.</div>
+
+  </div>
+
+</section>
+
+<section class="box">
+
+  <h2>Processo seletivo</h2>
+
+  <p class="box-subtitle">
+    Sua inscrição será analisada pela equipe responsável pelo recrutamento.
+  </p>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-number">ETAPA 01</div>
+      <h3>Inscrição</h3>
+      <p>Preencha sua candidatura com atenção e responda todas as perguntas.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">ETAPA 02</div>
+      <h3>Análise</h3>
+      <p>A equipe avaliará seu perfil, disponibilidade, experiência e respostas.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">ETAPA 03</div>
+      <h3>Contato</h3>
+      <p>Os candidatos selecionados serão chamados para continuar o processo.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="box">
+
+  <h2>Formulário de inscrição</h2>
+
+  <p class="box-subtitle">
+    Preencha as informações abaixo para registrar sua candidatura.
+  </p>
+
+  <form>
+
+    <div class="form-group">
+
+      <label>Cargo desejado</label>
+
+      <select required>
+        <option value="">Selecione um cargo</option>
+        <option value="Help">Help</option>
+        <option value="Tutor">Tutor</option>
+        <option value="Game Master">Game Master</option>
+      </select>
+
+    </div>
+
+    <div class="form-row">
+
+      <div class="form-group">
+        <label>Nick no jogo</label>
+        <input type="text" placeholder="Digite seu nick" required>
+      </div>
+
+      <div class="form-group">
+        <label>Idade</label>
+        <input type="number" placeholder="Sua idade" required>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label>Discord</label>
+      <input type="text" placeholder="Seu usuário no Discord" required>
+    </div>
+
+    <div class="form-group">
+      <label>Há quanto tempo você joga PokéTibia?</label>
+      <input type="text" placeholder="Ex.: 3 anos" required>
+    </div>
+
+    <div class="form-group">
+      <label>Qual sua disponibilidade diária?</label>
+      <input type="text" placeholder="Ex.: 4 horas por dia" required>
+    </div>
+
+    <div class="form-group">
+      <label>Já participou da Staff de algum servidor?</label>
+      <textarea placeholder="Caso sim, conte onde participou, cargo e experiência."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Por que você quer fazer parte da Equipe Valhalla?</label>
+      <textarea placeholder="Conte sua motivação..." required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Como você acredita que pode contribuir com a comunidade?</label>
+      <textarea placeholder="Explique como pretende ajudar..." required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Um jogador está irritado e começa a reclamar da equipe. Como você lidaria com a situação?</label>
+      <textarea placeholder="Explique como você agiria..." required></textarea>
+    </div>
+
+    <div class="notice">
+      O envio da candidatura não garante entrada na Staff. Todas as inscrições
+      poderão passar por análise e outras etapas antes da seleção final.
+    </div>
+
+    <button class="submit-button" type="submit">
+      Enviar candidatura
+    </button>
+
+  </form>
+
+</section>
+
+</main>
+
+<footer>
+  Poké Valhalla Wiki • Recrutamento da Equipe
+</footer>
+
+</body>
+</html>
