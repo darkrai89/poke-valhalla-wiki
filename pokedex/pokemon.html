@@ -1,1 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokémon | Pokédex Valhalla</title>
 
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#05090f;--panel:#0b141f;--panel2:#101c29;--border:#263b50;
+  --blue:#29b6ff;--gold:#e2b85a;--text:#e7eef4;--muted:#8da1b2;
+}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:radial-gradient(circle at 50% 0%,#10243d 0%,#07111d 30%,#05090f 68%);
+  color:var(--text);min-height:100vh
+}
+header{
+  height:78px;background:#050a11;border-bottom:1px solid #23374b;
+  display:flex;align-items:center;padding:0 35px;position:sticky;top:0;z-index:50
+}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:54px;height:54px;object-fit:contain}
+.brand strong{color:white;font-size:18px}.brand span{color:var(--blue)}
+nav{margin-left:40px;display:flex;gap:24px}
+nav a{color:#a9b8c5;text-decoration:none;font-size:14px}
+nav a:hover{color:var(--blue)}
+.back{margin-left:auto;color:var(--blue);text-decoration:none;font-size:14px}
+.container{width:94%;max-width:1250px;margin:auto;padding:30px 0 70px}
+.breadcrumb{color:#70869a;font-size:13px;margin-bottom:22px}
+.breadcrumb a{color:var(--blue);text-decoration:none}
+.loading,.error{
+  background:#0a131e;border:1px solid #22374b;border-radius:11px;
+  padding:25px;color:var(--muted)
+}
+.pokemon-hero{display:grid;grid-template-columns:330px 1fr;gap:25px;margin-bottom:25px}
+.pokemon-image{
+  min-height:330px;background:radial-gradient(circle,#174a48 0%,#0c2730 38%,#08121c 75%);
+  border:1px solid #285069;border-radius:15px;display:flex;align-items:center;
+  justify-content:center;position:relative;overflow:hidden
+}
+.pokemon-image img{width:230px;height:230px;object-fit:contain;image-rendering:auto}
+.big-number{
+  position:absolute;bottom:15px;right:18px;font-size:38px;font-weight:bold;
+  color:rgba(255,255,255,.07)
+}
+.pokemon-info{
+  background:linear-gradient(145deg,#0d1824,#09121c);
+  border:1px solid var(--border);border-radius:15px;padding:30px
+}
+.number{color:#668198;font-size:13px;margin-bottom:7px}
+.pokemon-info h1{font-size:40px;margin-bottom:12px}
+.types{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.type{
+  padding:7px 12px;border-radius:6px;font-size:12px;font-weight:bold;
+  background:#152332;border:1px solid #314b61;color:#dbe7ef
+}
+.description{color:#9bafbf;line-height:1.7;margin-bottom:25px}
+.basic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.basic{
+  background:#09131e;border:1px solid #20364a;padding:13px;border-radius:8px
+}
+.basic small{color:#6f879a;display:block;margin-bottom:6px}
+.basic strong{font-size:14px}
+.content{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+.box{
+  background:#0a131e;border:1px solid #22374b;border-radius:11px;
+  padding:23px;margin-bottom:20px
+}
+.box h2{
+  font-size:19px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid #1d3042
+}
+.rows{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row{
+  background:#0d1824;border:1px solid #20364a;border-radius:7px;padding:13px
+}
+.row small{display:block;color:#70869a;margin-bottom:5px}
+.row span{display:block;color:#95aabc;font-size:13px;margin-top:5px}
+.pending{color:var(--gold)}
+.moves{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.move{
+  background:#0d1824;border:1px solid #20364a;border-radius:8px;padding:14px
+}
+.move small{display:block;color:#70869a;margin-bottom:5px}
+.move strong{display:block;margin-bottom:6px}
+.move span{color:#9aafbf;font-size:13px;line-height:1.5}
+.side-link{
+  display:block;color:#9fb3c3;text-decoration:none;padding:12px 0;
+  border-bottom:1px solid #1b2d3e
+}
+.side-link:hover{color:var(--blue)}
+.notice{
+  color:#8095a7;font-size:13px;line-height:1.6;background:#09131e;
+  border:1px solid #20364a;border-radius:8px;padding:13px
+}
+footer{
+  border-top:1px solid #1d3042;padding:25px;text-align:center;
+  color:#65798a;font-size:13px
+}
+@media(max-width:900px){
+  .pokemon-hero,.content{grid-template-columns:1fr}
+  .basic-grid,.rows,.moves{grid-template-columns:repeat(2,1fr)}
+  nav{display:none}
+}
+@media(max-width:560px){
+  header{padding:12px;height:auto}
+  .pokemon-info h1{font-size:32px}
+  .basic-grid,.rows,.moves{grid-template-columns:1fr}
+  .pokemon-image{min-height:270px}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <a class="brand" href="../index.html">
+    <img src="../logo-valhalla.png" alt="Poké Valhalla">
+    <strong>POKÉ <span>VALHALLA</span></strong>
+  </a>
+  <nav>
+    <a href="../index.html">Início</a>
+    <a href="index.html">Pokédex</a>
+    <a href="#">Mapa</a>
+    <a href="#">Sistemas</a>
+    <a href="#">Quests</a>
+    <a href="#">Guias</a>
+  </nav>
+  <a class="back" href="index.html">← Voltar para Pokédex</a>
+</header>
+
+<main class="container">
+  <div class="breadcrumb">
+    <a href="../index.html">Wiki</a> ›
+    <a href="index.html">Pokédex</a> ›
+    <span id="crumbName">Carregando...</span>
+  </div>
+
+  <div id="loading" class="loading">Carregando informações do Pokémon...</div>
+
+  <div id="page" hidden>
+    <section class="pokemon-hero">
+      <div class="pokemon-image">
+        <img id="pokemonSprite" src="" alt="">
+        <div id="bigNumber" class="big-number"></div>
+      </div>
+
+      <div class="pokemon-info">
+        <div id="number" class="number"></div>
+        <h1 id="pokemonName">Pokémon</h1>
+        <div id="types" class="types"></div>
+
+        <p id="description" class="description">
+          Informações de combate exibidas conforme os dados cadastrados no Poké Valhalla.
+        </p>
+
+        <div class="basic-grid">
+          <div class="basic"><small>Level</small><strong id="level">—</strong></div>
+          <div class="basic"><small>Wild Level</small><strong id="wildLvl">—</strong></div>
+          <div class="basic"><small>Experiência</small><strong id="exp">—</strong></div>
+          <div class="basic"><small>Agilidade</small><strong id="agility">—</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="content">
+      <div>
+        <section class="box" id="status">
+          <h2>📊 Status</h2>
+          <div class="rows">
+            <div class="row"><small>Offense</small><strong id="offense">—</strong></div>
+            <div class="row"><small>Defense</small><strong id="defense">—</strong></div>
+            <div class="row"><small>Special Attack</small><strong id="specialattack">—</strong></div>
+            <div class="row"><small>Special Defense</small><strong id="specialdefense">—</strong></div>
+            <div class="row"><small>Vitality</small><strong id="vitality">—</strong></div>
+            <div class="row"><small>Nature</small><strong class="pending">A definir</strong></div>
+          </div>
+        </section>
+
+        <section class="box" id="moves">
+          <h2>⚡ Moves</h2>
+          <div id="movesList" class="moves"></div>
+        </section>
+      </div>
+
+      <aside>
+        <section class="box">
+          <h2>📌 Navegação</h2>
+          <a class="side-link" href="#status">Status</a>
+          <a class="side-link" href="#moves">Moves</a>
+          <a class="side-link" href="index.html">Voltar à Pokédex</a>
+        </section>
+
+        <section class="box">
+          <h2>ℹ️ Dados do servidor</h2>
+          <div id="serverStatus" class="notice"></div>
+        </section>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer>Poké Valhalla Wiki • Dados do jogo em desenvolvimento</footer>
+
+<script src="pokemon-data.js"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = Number(params.get("id"));
+
+const el = id => document.getElementById(id);
+
+function pretty(text){
+  return String(text || "")
+    .replaceAll("-", " ")
+    .split(" ")
+    .map(w => w ? w.charAt(0).toUpperCase() + w.slice(1) : "")
+    .join(" ");
+}
+
+function normalizeName(text){
+  return String(text || "").toLowerCase().replaceAll("-", " ").trim();
+}
+
+function setValue(id, value){
+  el(id).textContent = value ?? "—";
+}
+
+async function loadPokemon(){
+  if(!id || id < 1){
+    el("loading").textContent = "Pokémon inválido.";
+    return;
+  }
+
+  try{
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    if(!response.ok) throw new Error("Pokémon não encontrado");
+
+    const api = await response.json();
+    const displayName = pretty(api.name);
+    const key1 = normalizeName(api.name);
+    const key2 = api.name.toLowerCase();
+
+    const gameData =
+      window.POKEMON_GAME_DATA?.[key1] ||
+      window.POKEMON_GAME_DATA?.[key2] ||
+      null;
+
+    document.title = `${displayName} | Pokédex Valhalla`;
+    el("crumbName").textContent = displayName;
+    el("pokemonName").textContent = displayName;
+    el("number").textContent = `#${String(id).padStart(3,"0")}`;
+    el("bigNumber").textContent = `#${String(id).padStart(3,"0")}`;
+
+    el("pokemonSprite").src =
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+    el("pokemonSprite").alt = displayName;
+
+    const types = gameData
+      ? [gameData.type, gameData.type2].filter(Boolean)
+      : api.types.map(t => t.type.name);
+
+    el("types").innerHTML = types
+      .map(type => `<span class="type">${pretty(type)}</span>`)
+      .join("");
+
+    if(gameData){
+      ["level","wildLvl","exp","agility","offense","defense",
+       "specialattack","specialdefense","vitality"]
+        .forEach(field => setValue(field, gameData[field]));
+
+      const moves = Array.isArray(gameData.moves) ? gameData.moves : [];
+
+      if(moves.length){
+        el("movesList").innerHTML = moves
+          .sort((a,b) => a.slot - b.slot)
+          .map(move => `
+            <div class="move">
+              <small>M${move.slot}</small>
+              <strong>${move.name}</strong>
+              <span>
+                Level ${move.level} | CD: ${move.cd}s | ${pretty(move.type)}
+                <br>Força: ${move.power} | Distância: ${move.dist}
+              </span>
+            </div>
+          `).join("");
+      }else{
+        el("movesList").innerHTML =
+          `<div class="row"><strong class="pending">Moves não encontrados no configuration.lua.</strong></div>`;
+      }
+
+      el("serverStatus").innerHTML =
+        `✅ Este Pokémon possui dados do <strong>configuration.lua</strong> do Poké Valhalla.`;
+    }else{
+      el("movesList").innerHTML =
+        `<div class="row"><strong class="pending">Dados do servidor ainda não encontrados para este Pokémon.</strong></div>`;
+
+      el("serverStatus").innerHTML =
+        `⚠️ Nome e sprite carregados, mas não encontramos um cadastro correspondente no configuration.lua.`;
+    }
+
+    el("loading").hidden = true;
+    el("page").hidden = false;
+
+  }catch(error){
+    el("loading").textContent =
+      "Não foi possível carregar este Pokémon. Volte para a Pokédex e tente novamente.";
+    console.error(error);
+  }
+}
+
+loadPokemon();
+</script>
+</body>
+</html>
