@@ -547,13 +547,13 @@ footer{
     Preencha as informações abaixo para registrar sua candidatura.
   </p>
 
-  <form>
+  <form action="https://formspree.io/f/xoeqdnae" method="POST">
 
     <div class="form-group">
 
       <label>Cargo desejado</label>
 
-      <select required>
+    <select name="Cargo desejado" required>
         <option value="">Selecione um cargo</option>
         <option value="Help">Help</option>
         <option value="Tutor">Tutor</option>
@@ -566,56 +566,56 @@ footer{
 
       <div class="form-group">
         <label>Nick no jogo</label>
-        <input type="text" placeholder="Digite seu nick" required>
+    <input type="text" name="Nick no jogo" placeholder="Digite seu nick" required>
       </div>
 
       <div class="form-group">
         <label>Idade</label>
-        <input type="number" placeholder="Sua idade" required>
+     <input type="number" name="Idade" placeholder="Sua idade" required>
       </div>
 
     </div>
 
     <div class="form-group">
       <label>Discord</label>
-      <input type="text" placeholder="Seu usuário no Discord" required>
+ <input type="text" name="Discord" placeholder="Seu usuário no Discord" required>
     </div>
 
     <div class="form-group">
       <label>Há quanto tempo você joga PokéTibia?</label>
-      <input type="text" placeholder="Ex.: 3 anos" required>
+ <input type="text" name="Tempo de PokéTibia" placeholder="Ex.: 3 anos" required>
     </div>
 
     <div class="form-group">
       <label>Qual sua disponibilidade diária?</label>
-      <input type="text" placeholder="Ex.: 4 horas por dia" required>
+   <input type="text" name="Disponibilidade diária" placeholder="Ex.: 4 horas por dia" required>
     </div>
 
     <div class="form-group">
       <label>Já participou da Staff de algum servidor?</label>
-      <textarea placeholder="Caso sim, conte onde participou, cargo e experiência."></textarea>
+      <textarea name="Experiência anterior em Staff" placeholder="Caso sim, conte onde participou, cargo e experiência."></textarea>
     </div>
 
     <div class="form-group">
       <label>Por que você quer fazer parte da Equipe Valhalla?</label>
-      <textarea placeholder="Conte sua motivação..." required></textarea>
+  <textarea name="Motivação para entrar na Staff" placeholder="Conte sua motivação..." required></textarea>
     </div>
 
     <div class="form-group">
       <label>Como você acredita que pode contribuir com a comunidade?</label>
-      <textarea placeholder="Explique como pretende ajudar..." required></textarea>
+     <textarea name="Como pode contribuir" placeholder="Explique como pretende ajudar..." required></textarea>
     </div>
 
     <div class="form-group">
       <label>Um jogador está irritado e começa a reclamar da equipe. Como você lidaria com a situação?</label>
-      <textarea placeholder="Explique como você agiria..." required></textarea>
+      <textarea name="Situação com jogador irritado" placeholder="Explique como você agiria..." required></textarea>
     </div>
 
     <div class="notice">
       O envio da candidatura não garante entrada na Staff. Todas as inscrições
       poderão passar por análise e outras etapas antes da seleção final.
     </div>
-
+<input type="hidden" name="_subject" value="Nova candidatura - Staff Poké Valhalla">
     <button class="submit-button" type="submit">
       Enviar candidatura
     </button>
