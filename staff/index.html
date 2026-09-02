@@ -121,10 +121,17 @@ nav a:hover{
 }
 
 .hero-icon{
-  font-size:50px;
   margin-bottom:18px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
+.hero-icon img{
+  width:150px;
+  height:150px;
+  object-fit:contain;
+}
 .hero h1{
   font-size:38px;
   margin-bottom:12px;
@@ -358,7 +365,9 @@ footer{
 <main class="container">
 
 <section class="hero">
-  <div class="hero-icon">🛡️</div>
+<div class="hero-icon">
+  <img src="../icone-staff.png" alt="Equipe Valhalla">
+</div>
 
   <h1>Equipe <span>Valhalla</span></h1>
 
