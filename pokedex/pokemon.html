@@ -127,6 +127,23 @@ nav a:hover{color:var(--blue)}
   font-size:25px;
   font-weight:bold;
 }
+.evolution-step{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  min-width:125px;
+}
+
+.evolution-requirement{
+  color:var(--gold);
+  font-size:11px;
+  font-weight:bold;
+  text-align:center;
+  max-width:130px;
+  line-height:1.4;
+}  
   .moves{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .move{
   background:#0d1824;border:1px solid #20364a;border-radius:8px;padding:14px
@@ -352,12 +369,25 @@ async function loadEvolution(api){
         const name =
           pretty(pokemon.name);
 
-        const arrow =
-          index < evolutionPokemon.length - 1
-          ? `<span class="evolution-arrow">→</span>`
-          : "";
+const evolutionRequirements = {
+  1: "Level 40 + 1x Leaf Stone",
+  2: "Level 85 + 1x Poison Stone"
+};
 
-        return `
+const requirement = evolutionRequirements[pokemon.id];
+
+const arrow =
+  index < evolutionPokemon.length - 1
+  ? `
+    <div class="evolution-step">
+      <span class="evolution-requirement">
+        ${requirement || "Requisito a definir"}
+      </span>
+      <span class="evolution-arrow">→</span>
+    </div>
+  `
+  : "";
+return `
           <a
             class="evolution-card"
             href="pokemon.html?id=${pokemon.id}"
