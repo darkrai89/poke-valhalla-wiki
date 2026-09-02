@@ -78,7 +78,56 @@ nav a:hover{color:var(--blue)}
 .row small{display:block;color:#70869a;margin-bottom:5px}
 .row span{display:block;color:#95aabc;font-size:13px;margin-top:5px}
 .pending{color:var(--gold)}
-.moves{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+/* EVOLUÇÃO */
+
+.evolution-list{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.evolution-card{
+  min-width:145px;
+  background:#0d1824;
+  border:1px solid #20364a;
+  border-radius:9px;
+  padding:14px;
+  text-align:center;
+  text-decoration:none;
+  color:var(--text);
+  transition:.2s;
+}
+
+.evolution-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--blue);
+}
+
+.evolution-card img{
+  width:90px;
+  height:90px;
+  object-fit:contain;
+}
+
+.evolution-card small{
+  display:block;
+  color:#70869a;
+  margin-bottom:3px;
+}
+
+.evolution-card strong{
+  display:block;
+  font-size:15px;
+}
+
+.evolution-arrow{
+  color:var(--blue);
+  font-size:25px;
+  font-weight:bold;
+}
+  .moves{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .move{
   background:#0d1824;border:1px solid #20364a;border-radius:8px;padding:14px
 }
@@ -176,7 +225,12 @@ footer{
             <div class="row"><small>Nature</small><strong class="pending">A definir</strong></div>
           </div>
         </section>
-
+<section class="box" id="evolution">
+  <h2>🌱 Evolução</h2>
+  <div id="evolutionList" class="evolution-list">
+    Carregando cadeia evolutiva...
+  </div>
+</section>
         <section class="box" id="moves">
           <h2>⚡ Moves</h2>
           <div id="movesList" class="moves"></div>
@@ -224,6 +278,124 @@ function normalizeName(text){
 function setValue(id, value){
   el(id).textContent = value ?? "—";
 }
+async function loadEvolution(api){
+
+  const evolutionList = el("evolutionList");
+
+  try{
+
+    /* DESCOBRE A ESPÉCIE */
+    const speciesResponse = await fetch(api.species.url);
+
+    if(!speciesResponse.ok)
+      throw new Error("Espécie não encontrada");
+
+    const species = await speciesResponse.json();
+
+
+    /* BUSCA A CADEIA EVOLUTIVA */
+    const evolutionResponse = await fetch(
+      species.evolution_chain.url
+    );
+
+    if(!evolutionResponse.ok)
+      throw new Error("Evolução não encontrada");
+
+    const evolutionData =
+      await evolutionResponse.json();
+
+
+    /* MONTA A LISTA DE EVOLUÇÕES */
+    const evolutionPokemon = [];
+
+    function readChain(chain){
+
+      const speciesUrl =
+        chain.species.url.split("/").filter(Boolean);
+
+      const pokemonId =
+        Number(speciesUrl[speciesUrl.length - 1]);
+
+      evolutionPokemon.push({
+        id: pokemonId,
+        name: chain.species.name
+      });
+
+      chain.evolves_to.forEach(next =>
+        readChain(next)
+      );
+
+    }
+
+    readChain(evolutionData.chain);
+
+
+    /* POKÉMON SEM EVOLUÇÃO */
+    if(evolutionPokemon.length <= 1){
+
+      evolutionList.innerHTML =
+        `<div class="notice">
+          Este Pokémon não possui cadeia evolutiva.
+        </div>`;
+
+      return;
+    }
+
+
+    /* CRIA OS CARDS */
+    evolutionList.innerHTML =
+      evolutionPokemon.map((pokemon,index) => {
+
+        const number =
+          String(pokemon.id).padStart(3,"0");
+
+        const name =
+          pretty(pokemon.name);
+
+        const arrow =
+          index < evolutionPokemon.length - 1
+          ? `<span class="evolution-arrow">→</span>`
+          : "";
+
+        return `
+          <a
+            class="evolution-card"
+            href="pokemon.html?id=${pokemon.id}"
+          >
+
+            <small>#${number}</small>
+
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png"
+              alt="${name}"
+              loading="lazy"
+            >
+
+            <strong>${name}</strong>
+
+          </a>
+
+          ${arrow}
+        `;
+
+      }).join("");
+
+
+  }catch(error){
+
+    evolutionList.innerHTML =
+      `<div class="notice">
+        Informações de evolução ainda não disponíveis.
+      </div>`;
+
+    console.error(
+      "Erro ao carregar evolução:",
+      error
+    );
+
+  }
+
+}  
 
 async function loadPokemon(){
   if(!id || id < 1){
@@ -236,6 +408,8 @@ async function loadPokemon(){
     if(!response.ok) throw new Error("Pokémon não encontrado");
 
     const api = await response.json();
+
+    await loadEvolution(api);
     const displayName = pretty(api.name);
     const key1 = normalizeName(api.name);
     const key2 = api.name.toLowerCase();
