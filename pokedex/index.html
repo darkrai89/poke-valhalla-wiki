@@ -313,7 +313,7 @@ footer{
 <header>
 
 <a class="brand" href="../index.html">
-  <img src="../logo-valhalla.png.png" alt="Poké Valhalla">
+  <img src="../logo-valhalla.png" alt="Poké Valhalla">
   <strong>POKÉ <span>VALHALLA</span></strong>
 </a>
 
@@ -482,18 +482,41 @@ Poké Valhalla Wiki • Pokédex em desenvolvimento
 <script>
 const search = document.getElementById("searchPokemon");
 const cards = document.querySelectorAll(".poke-card");
+const filters = document.querySelectorAll(".filter");
 
-search.addEventListener("input", function(){
-  const value = this.value.toLowerCase();
+let activeType = "Todos";
+
+function filterPokemon() {
+  const searchValue = search.value.toLowerCase();
 
   cards.forEach(card => {
     const name = card.dataset.name.toLowerCase();
 
-    if(name.includes(value)){
+    const types = Array.from(
+      card.querySelectorAll(".type")
+    ).map(type => type.textContent.trim());
+
+    const matchesName = name.includes(searchValue);
+    const matchesType =
+      activeType === "Todos" ||
+      types.includes(activeType);
+
+    if (matchesName && matchesType) {
       card.style.display = "block";
-    }else{
+    } else {
       card.style.display = "none";
     }
+  });
+}
+
+search.addEventListener("input", filterPokemon);
+
+filters.forEach(button => {
+  button.addEventListener("click", function() {
+    filters.forEach(btn => btn.classList.remove("active"));
+    this.classList.add("active");
+    activeType = this.textContent.trim();
+    filterPokemon();
   });
 });
 </script>
