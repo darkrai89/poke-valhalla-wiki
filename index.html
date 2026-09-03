@@ -473,7 +473,91 @@ footer{
     transform:translateY(-3px) scale(1.06);
     box-shadow:0 7px 18px rgba(0,0,0,.45);
 }
+/* =========================================
+   LAYOUT DA WIKI + LATERAL DIREITA
+========================================= */
 
+.wiki-layout{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) 330px;
+    gap:24px;
+    align-items:start;
+}
+
+.wiki-main{
+    min-width:0;
+}
+
+.wiki-sidebar{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    position:sticky;
+    top:105px;
+}
+
+.wiki-sidebar .box{
+    width:100%;
+    padding:20px;
+}
+
+.wiki-sidebar .section-title{
+    display:block;
+    margin-bottom:16px;
+}
+
+.wiki-sidebar .section-title h2{
+    font-size:20px;
+    margin-bottom:6px;
+}
+
+.wiki-sidebar .section-title span{
+    display:block;
+}
+
+/* Futuro espaço para imagem da novidade */
+.news-feature-image{
+    width:100%;
+    height:180px;
+    border-radius:9px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,140,255,.12),
+            rgba(0,70,140,.04)
+        );
+    border:1px solid #25394d;
+    margin-bottom:15px;
+    overflow:hidden;
+}
+
+.news-feature-image img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+}
+
+/* RESPONSIVO DA NOVA ESTRUTURA */
+@media(max-width:1050px){
+
+    .wiki-layout{
+        grid-template-columns:1fr;
+    }
+
+    .wiki-sidebar{
+        position:static;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:650px){
+
+    .wiki-sidebar{
+        display:flex;
+    }
+}
 </style>
 </head>
 
@@ -521,7 +605,8 @@ POKÉ <span>VALHALLA</span>
 </header>
 
 <main class="container">
-
+<div class="wiki-layout">
+<div class="wiki-main">
 <section class="hero">
 
 <div class="hero-content">
@@ -666,15 +751,29 @@ bosses, itens, sistemas e todos os segredos do mundo de Valhalla.
 </section>
 
 
-<section class="lower">
 
+</div>
+<aside class="wiki-sidebar">
 <div class="box">
 
 <div class="section-title">
 <h2>📢 Novidades</h2>
 <span>Últimas notícias de Valhalla</span>
 </div>
-
+<div class="news-feature-image">
+    <div style="
+        width:100%;
+        height:100%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        color:#71879b;
+        font-size:13px;
+    ">
+        Imagem da novidade
+    </div>
+</div>
 <div class="update">
 <span class="tag">BOSSES</span>
 <strong>👹 Novos desafios estão chegando</strong>
@@ -723,7 +822,8 @@ eternizado na história do Poké Valhalla.
 
 </div>
 
-</section>
+</aside>
+</div>
 
 </main>
 
