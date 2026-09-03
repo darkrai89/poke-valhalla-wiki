@@ -479,7 +479,7 @@ footer{
 
 .wiki-layout{
     display:grid;
-    grid-template-columns:minmax(0, 1fr) 330px;
+    grid-template-columns:220px minmax(0, 1fr) 330px;
     gap:24px;
     align-items:start;
 }
@@ -558,6 +558,145 @@ footer{
         display:flex;
     }
 }
+/* =========================================
+   MENU LATERAL ESQUERDO
+========================================= */
+
+.wiki-left{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    position:sticky;
+    top:105px;
+    align-self:start;
+    padding:4px 0 0;
+}
+
+.left-home-button{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    color:#dbe6ef;
+    background:#0b1622;
+    border:1px solid #285276;
+    border-radius:7px;
+    padding:12px 8px;
+    margin-bottom:22px;
+    font-size:13px;
+    transition:.2s;
+}
+
+.left-home-button:hover{
+    border-color:var(--blue);
+    color:white;
+}
+
+.left-section{
+    margin-bottom:22px;
+}
+
+.left-title{
+    display:block;
+    color:#6887a2;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:.7px;
+    padding:0 10px 8px;
+    margin-bottom:5px;
+    border-bottom:1px solid #172a3b;
+}
+
+.left-section a{
+    display:block;
+    color:#a9bac8;
+    text-decoration:none;
+    font-size:13px;
+    line-height:1.2;
+    padding:8px 10px;
+    border-radius:6px;
+    transition:.18s;
+}
+
+.left-section a:hover{
+    color:#ffffff;
+    background:#0b2235;
+    padding-left:14px;
+}
+
+.left-section a.active{
+    color:#ffffff;
+    background:linear-gradient(
+        90deg,
+        rgba(0,126,255,.28),
+        rgba(0,126,255,.06)
+    );
+    border-left:3px solid var(--blue);
+}
+
+/* ÁREA DA ARTE NA PARTE INFERIOR */
+.left-art{
+    width:100%;
+    height:360px;
+    margin-top:5px;
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid #1d3850;
+    background:
+        radial-gradient(
+            circle at 50% 80%,
+            rgba(0,126,255,.20),
+            transparent 45%
+        ),
+        linear-gradient(
+            180deg,
+            #07111d,
+            #07192a
+        );
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#56748e;
+    font-size:12px;
+}
+
+/* AJUSTES PARA 3 COLUNAS */
+@media(max-width:1250px){
+
+    .wiki-layout{
+        grid-template-columns:190px minmax(0,1fr) 290px;
+        gap:18px;
+    }
+
+    .grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:1050px){
+
+    .wiki-layout{
+        grid-template-columns:180px minmax(0,1fr);
+    }
+
+    .wiki-sidebar{
+        grid-column:1 / -1;
+    }
+}
+
+@media(max-width:800px){
+
+    .wiki-layout{
+        grid-template-columns:1fr;
+    }
+
+    .wiki-left{
+        position:static;
+    }
+
+    .left-art{
+        display:none;
+    }
+}
 </style>
 </head>
 
@@ -606,7 +745,65 @@ POKÉ <span>VALHALLA</span>
 
 <main class="container">
 <div class="wiki-layout">
-<div class="wiki-main">
+<aside class="wiki-left">
+
+    <a href="./" class="left-home-button">
+        🏠 Acessar a página principal
+    </a>
+
+    <div class="left-section">
+        <span class="left-title">NAVEGAÇÃO</span>
+
+        <a href="./" class="active">⌂ Página principal</a>
+        <a href="pokedex/">◉ Pokédex</a>
+        <a href="#">🗺 Mapa</a>
+    </div>
+
+    <div class="left-section">
+        <span class="left-title">COMEÇANDO</span>
+
+        <a href="#">📖 Guia do Iniciante</a>
+        <a href="#">⬇ Baixar Jogo</a>
+        <a href="#">👤 Criar Conta</a>
+        <a href="#">📜 Regras</a>
+        <a href="staff/">♟ Equipe Valhalla</a>
+        <a href="#">🛡 Segurança</a>
+        <a href="#">💬 Suporte</a>
+    </div>
+
+    <div class="left-section">
+        <span class="left-title">JOGABILIDADE</span>
+
+        <a href="#">👹 Bosses</a>
+        <a href="#">🏰 Dungeons</a>
+        <a href="#">🥚 Day Care</a>
+        <a href="#">🏆 Elite Four</a>
+        <a href="#">⚡ Experience Groups</a>
+        <a href="#">🛡 Guilds</a>
+        <a href="#">⚔ Hunts</a>
+        <a href="#">📜 Quests</a>
+        <a href="#">✨ Sistema Shiny</a>
+        <a href="#">💿 TM</a>
+        <a href="#">🔮 Abilities</a>
+        <a href="#">💎 Itens de Evolução</a>
+        <a href="#">🎁 Drops</a>
+        <a href="#">🧙 NPCs</a>
+    </div>
+
+    <div class="left-section">
+        <span class="left-title">COMUNIDADE</span>
+
+        <a href="#">📢 Notícias</a>
+        <a href="#">🎉 Eventos</a>
+        <a href="#">🏆 Salão da Bravura</a>
+    </div>
+
+    <div class="left-art">
+        <span>Arte Valhalla</span>
+    </div>
+
+</aside>
+    <div class="wiki-main">
 <section class="hero">
 
 <div class="hero-content">
