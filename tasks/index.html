@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tasks | Poké Valhalla Wiki</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#05090f;
+    --panel:#0b121c;
+    --panel2:#101a27;
+    --border:#26384c;
+    --blue:#24a8ff;
+    --blue2:#006eff;
+    --gold:#e7b94d;
+    --green:#48d597;
+    --red:#e56b6b;
+    --text:#dbe6ef;
+    --muted:#8497a8;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 50% 0%,#10223a 0%,#07101b 30%,#05090f 70%);
+    color:var(--text);
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    height:82px;
+    background:rgba(5,10,17,.96);
+    border-bottom:1px solid #23364a;
+    display:flex;
+    align-items:center;
+    padding:0 45px;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    text-decoration:none;
+    color:white;
+}
+
+.brand img{
+    width:65px;
+    height:65px;
+    object-fit:contain;
+}
+
+.brand-text{
+    font-weight:bold;
+    font-size:20px;
+    letter-spacing:1px;
+}
+
+.brand-text span{
+    color:var(--blue);
+}
+
+nav{
+    margin-left:55px;
+    display:flex;
+    gap:28px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#aebdca;
+    font-size:14px;
+    transition:.2s;
+}
+
+nav a:hover{
+    color:var(--blue);
+}
+
+/* CONTEÚDO */
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+    padding:45px 0 80px;
+}
+
+.back{
+    display:inline-block;
+    margin-bottom:25px;
+    color:#8298aa;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.back:hover{
+    color:var(--blue);
+}
+
+/* HERO */
+
+.task-hero{
+    position:relative;
+    min-height:330px;
+    overflow:hidden;
+    border:1px solid #28445e;
+    border-radius:18px;
+    background:
+        radial-gradient(circle at 80% 45%,rgba(0,126,255,.18),transparent 30%),
+        linear-gradient(120deg,#0c1926,#07101a);
+    padding:50px;
+    display:flex;
+    align-items:center;
+}
+
+.task-hero::after{
+    content:"✓";
+    position:absolute;
+    right:65px;
+    font-size:220px;
+    font-weight:bold;
+    color:rgba(36,168,255,.045);
+    transform:rotate(-8deg);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:650px;
+}
+
+.task-symbol{
+    width:78px;
+    height:78px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:39px;
+    margin-bottom:20px;
+    background:rgba(0,126,255,.10);
+    border:1px solid #285276;
+}
+
+.task-hero h1{
+    color:white;
+    font-size:44px;
+    margin-bottom:8px;
+}
+
+.task-hero h1 span{
+    color:var(--blue);
+}
+
+.subtitle{
+    color:#54bfff;
+    font-size:16px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.task-hero p{
+    color:#9aabba;
+    line-height:1.75;
+    font-size:15px;
+}
+
+/* TÍTULOS */
+
+.section-title{
+    margin-top:45px;
+    margin-bottom:20px;
+}
+
+.section-title small{
+    color:var(--blue);
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.section-title h2{
+    color:white;
+    font-size:25px;
+    margin-top:6px;
+}
+
+/* COMO FUNCIONA */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.step{
+    position:relative;
+    background:linear-gradient(145deg,#0e1824,#09121c);
+    border:1px solid #263b50;
+    border-radius:12px;
+    padding:25px;
+    min-height:205px;
+    transition:.25s;
+}
+
+.step:hover{
+    transform:translateY(-4px);
+    border-color:#168bd5;
+}
+
+.step-number{
+    position:absolute;
+    right:18px;
+    top:13px;
+    color:rgba(79,192,255,.13);
+    font-size:45px;
+    font-weight:bold;
+}
+
+.step-icon{
+    font-size:30px;
+    margin-bottom:16px;
+}
+
+.step h3{
+    color:#4fc0ff;
+    margin-bottom:10px;
+    font-size:17px;
+}
+
+.step p{
+    color:#8498aa;
+    font-size:13px;
+    line-height:1.65;
+}
+
+/* EXEMPLO DE TASK */
+
+.task-example{
+    background:#09131e;
+    border:1px solid #284158;
+    border-radius:13px;
+    overflow:hidden;
+}
+
+.task-example-header{
+    padding:18px 22px;
+    background:#0d1b29;
+    border-bottom:1px solid #263c50;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.task-example-header strong{
+    color:white;
+}
+
+.task-status{
+    color:#55c3ff;
+    font-size:12px;
+    background:#082b47;
+    padding:5px 10px;
+    border-radius:5px;
+}
+
+.task-content{
+    padding:25px;
+}
+
+.task-name{
+    color:#dce9f2;
+    font-size:18px;
+    margin-bottom:18px;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    color:#8398aa;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.progress{
+    width:100%;
+    height:9px;
+    border-radius:10px;
+    background:#142333;
+    overflow:hidden;
+}
+
+.progress-bar{
+    width:58%;
+    height:100%;
+    background:linear-gradient(90deg,#006eff,#24a8ff);
+    border-radius:10px;
+}
+
+.reward-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:22px;
+}
+
+.reward{
+    background:#0c1925;
+    border:1px solid #20384c;
+    border-radius:8px;
+    padding:15px;
+}
+
+.reward small{
+    display:block;
+    color:#70879a;
+    margin-bottom:5px;
+}
+
+.reward strong{
+    color:#cbdbe6;
+}
+
+/* AÇÕES */
+
+.actions{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.action{
+    padding:22px;
+    border-radius:10px;
+    background:#0a141f;
+    border:1px solid #23394d;
+}
+
+.action strong{
+    display:block;
+    color:#d9e7f0;
+    margin-bottom:8px;
+}
+
+.action p{
+    color:#7f94a6;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* OBSERVAÇÃO */
+
+.info-box{
+    margin-top:35px;
+    padding:25px;
+    border-left:4px solid var(--blue);
+    border-radius:7px;
+    background:#0a1622;
+}
+
+.info-box strong{
+    color:#4fc0ff;
+}
+
+.info-box p{
+    color:#8398aa;
+    margin-top:8px;
+    line-height:1.65;
+    font-size:13px;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid #1e3041;
+    background:#050a10;
+    text-align:center;
+    padding:30px;
+    color:#5e7385;
+    font-size:13px;
+}
+
+@media(max-width:800px){
+
+    header{
+        padding:0 20px;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .task-hero{
+        padding:30px;
+    }
+
+    .task-hero h1{
+        font-size:34px;
+    }
+
+    .steps,
+    .actions,
+    .reward-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a href="../" class="brand">
+
+    <img src="../logo-valhalla.png.png" alt="Poké Valhalla">
+
+    <div class="brand-text">
+        POKÉ <span>VALHALLA</span>
+    </div>
+
+</a>
+
+<nav>
+    <a href="../">Início</a>
+    <a href="../pokedex/">Pokédex</a>
+    <a href="#">Mapa</a>
+    <a href="#">Sistemas</a>
+    <a href="#">Quests</a>
+    <a href="#">Guias</a>
+</nav>
+
+</header>
+
+
+<main class="container">
+
+<a href="../" class="back">← Voltar para a página principal</a>
+
+
+<section class="task-hero">
+
+    <div class="hero-content">
+
+        <div class="task-symbol">📋</div>
+
+        <h1>Sistema de <span>Tasks</span></h1>
+
+        <div class="subtitle">
+            Aceite o desafio. Complete seu objetivo. Evolua sua jornada.
+        </div>
+
+        <p>
+            As Tasks oferecem novos objetivos aos treinadores de Valhalla.
+            Escolha um desafio, acompanhe seu progresso e complete os
+            objetivos para conquistar experiência e Task Points.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="section-title">
+    <small>COMO FUNCIONA</small>
+    <h2>Sua jornada em três etapas</h2>
+</div>
+
+
+<section class="steps">
+
+    <div class="step">
+
+        <div class="step-number">01</div>
+        <div class="step-icon">📜</div>
+
+        <h3>Escolha uma Task</h3>
+
+        <p>
+            Consulte os desafios disponíveis e escolha a Task
+            que deseja realizar durante sua aventura.
+        </p>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-number">02</div>
+        <div class="step-icon">⚔️</div>
+
+        <h3>Complete o objetivo</h3>
+
+        <p>
+            Após iniciar uma Task, seu progresso poderá ser
+            acompanhado conforme você avança no objetivo proposto.
+        </p>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-number">03</div>
+        <div class="step-icon">🏆</div>
+
+        <h3>Finalize sua Task</h3>
+
+        <p>
+            Ao concluir o objetivo, finalize a Task para receber
+            as recompensas correspondentes ao desafio.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="section-title">
+    <small>ACOMPANHAMENTO</small>
+    <h2>Veja seu progresso</h2>
+</div>
+
+
+<section class="task-example">
+
+    <div class="task-example-header">
+
+        <strong>Exemplo de progresso</strong>
+
+        <span class="task-status">TASK ATIVA</span>
+
+    </div>
+
+
+    <div class="task-content">
+
+        <div class="task-name">
+            ⚔️ Objetivo em andamento
+        </div>
+
+        <div class="progress-info">
+
+            <span>Progresso da Task</span>
+
+            <span>58%</span>
+
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
+
+
+        <div class="reward-grid">
+
+            <div class="reward">
+                <small>Recompensa</small>
+                <strong>⭐ Experiência</strong>
+            </div>
+
+            <div class="reward">
+                <small>Recompensa especial</small>
+                <strong>🏅 Task Points</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="section-title">
+    <small>CONTROLE</small>
+    <h2>Gerencie seus desafios</h2>
+</div>
+
+
+<section class="actions">
+
+    <div class="action">
+
+        <strong>▶ Iniciar</strong>
+
+        <p>
+            Comece uma nova Task disponível para o seu treinador.
+        </p>
+
+    </div>
+
+
+    <div class="action">
+
+        <strong>✓ Finalizar</strong>
+
+        <p>
+            Após completar o objetivo, finalize a Task e receba
+            suas recompensas.
+        </p>
+
+    </div>
+
+
+    <div class="action">
+
+        <strong>✕ Cancelar</strong>
+
+        <p>
+            Caso necessário, uma Task em andamento poderá
+            ser cancelada.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="info-box">
+
+    <strong>📌 Tasks disponíveis</strong>
+
+    <p>
+        A lista completa de Tasks, criaturas, quantidades e recompensas
+        será adicionada à Wiki conforme o conteúdo oficial do
+        Poké Valhalla for definido.
+    </p>
+
+</div>
+
+</main>
+
+
+<footer>
+
+    <strong>Poké Valhalla Wiki</strong>
+
+    <br><br>
+
+    Explore. Descubra. Escreva sua história em Valhalla.
+
+</footer>
+
+</body>
+</html>
