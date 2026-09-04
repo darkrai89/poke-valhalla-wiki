@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Missões | Poké Valhalla Wiki</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#05090f;
+    --panel:#0b121c;
+    --panel2:#101a27;
+    --border:#26384c;
+    --blue:#24a8ff;
+    --gold:#e7b94d;
+    --text:#dbe6ef;
+    --muted:#8497a8;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 50% 0%,#10223a 0%,#07101b 30%,#05090f 70%);
+    color:var(--text);
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    height:82px;
+    background:rgba(5,10,17,.96);
+    border-bottom:1px solid #23364a;
+    display:flex;
+    align-items:center;
+    padding:0 45px;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    text-decoration:none;
+    color:white;
+}
+
+.brand img{
+    width:65px;
+    height:65px;
+    object-fit:contain;
+}
+
+.brand-text{
+    font-weight:bold;
+    font-size:20px;
+    letter-spacing:1px;
+}
+
+.brand-text span{
+    color:var(--blue);
+}
+
+nav{
+    margin-left:55px;
+    display:flex;
+    gap:28px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#aebdca;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:var(--blue);
+}
+
+/* CONTEÚDO */
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+    padding:45px 0 80px;
+}
+
+.back{
+    display:inline-block;
+    margin-bottom:25px;
+    color:#8298aa;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.back:hover{
+    color:var(--blue);
+}
+
+/* HERO */
+
+.mission-hero{
+    position:relative;
+    min-height:350px;
+    overflow:hidden;
+    border:1px solid #28445e;
+    border-radius:18px;
+    background:
+        radial-gradient(circle at 78% 45%,rgba(231,185,77,.10),transparent 30%),
+        radial-gradient(circle at 25% 20%,rgba(0,126,255,.12),transparent 35%),
+        linear-gradient(120deg,#0c1926,#07101a);
+    padding:50px;
+    display:flex;
+    align-items:center;
+}
+
+.mission-hero::after{
+    content:"⚔";
+    position:absolute;
+    right:65px;
+    font-size:190px;
+    color:rgba(231,185,77,.045);
+    transform:rotate(-10deg);
+}
+
+.hero-content{
+    max-width:650px;
+    position:relative;
+    z-index:2;
+}
+
+.mission-symbol{
+    width:80px;
+    height:80px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:18px;
+    background:rgba(231,185,77,.08);
+    border:1px solid rgba(231,185,77,.28);
+    font-size:38px;
+    margin-bottom:20px;
+}
+
+.mission-hero h1{
+    color:white;
+    font-size:44px;
+    margin-bottom:8px;
+}
+
+.mission-hero h1 span{
+    color:var(--gold);
+}
+
+.subtitle{
+    color:#e7c56f;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.mission-hero p{
+    color:#9aabba;
+    line-height:1.75;
+    font-size:15px;
+}
+
+/* TITULOS */
+
+.section-title{
+    margin-top:45px;
+    margin-bottom:20px;
+}
+
+.section-title small{
+    color:var(--blue);
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.section-title h2{
+    color:white;
+    font-size:25px;
+    margin-top:6px;
+}
+
+/* CARDS */
+
+.mission-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.mission-card{
+    position:relative;
+    min-height:205px;
+    padding:25px;
+    border-radius:12px;
+    background:linear-gradient(145deg,#0e1824,#09121c);
+    border:1px solid #263b50;
+    transition:.25s;
+    overflow:hidden;
+}
+
+.mission-card:hover{
+    transform:translateY(-4px);
+    border-color:#168bd5;
+}
+
+.mission-number{
+    position:absolute;
+    right:18px;
+    top:12px;
+    font-size:45px;
+    font-weight:bold;
+    color:rgba(79,192,255,.10);
+}
+
+.mission-icon{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.mission-card h3{
+    color:#4fc0ff;
+    margin-bottom:10px;
+    font-size:17px;
+}
+
+.mission-card p{
+    color:#8498aa;
+    font-size:13px;
+    line-height:1.65;
+}
+
+/* PROGRESSO */
+
+.progress-panel{
+    border:1px solid #284158;
+    background:#09131e;
+    border-radius:13px;
+    overflow:hidden;
+}
+
+.progress-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 22px;
+    background:#0d1b29;
+    border-bottom:1px solid #263c50;
+}
+
+.progress-header strong{
+    color:white;
+}
+
+.progress-status{
+    color:#e7c56f;
+    background:rgba(231,185,77,.08);
+    border:1px solid rgba(231,185,77,.18);
+    padding:5px 10px;
+    border-radius:5px;
+    font-size:11px;
+}
+
+.progress-content{
+    padding:25px;
+}
+
+.progress-title{
+    font-size:18px;
+    color:#dce9f2;
+    margin-bottom:20px;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    color:#8398aa;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.progress{
+    height:9px;
+    width:100%;
+    background:#142333;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    width:42%;
+    height:100%;
+    border-radius:10px;
+    background:linear-gradient(90deg,#006eff,#24a8ff);
+}
+
+/* PONTOS */
+
+.points-box{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.point-card{
+    background:#0c1925;
+    border:1px solid #20384c;
+    border-radius:9px;
+    padding:20px;
+}
+
+.point-card small{
+    color:#70879a;
+    display:block;
+    margin-bottom:7px;
+}
+
+.point-card strong{
+    color:#dbe8f1;
+}
+
+/* DESBLOQUEIO */
+
+.unlock{
+    margin-top:35px;
+    border:1px solid rgba(231,185,77,.25);
+    background:
+        radial-gradient(circle at 90% 50%,rgba(231,185,77,.06),transparent 25%),
+        #0a141f;
+    border-radius:12px;
+    padding:28px;
+}
+
+.unlock-header{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:12px;
+}
+
+.lock{
+    width:48px;
+    height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:rgba(231,185,77,.08);
+    font-size:23px;
+}
+
+.unlock h3{
+    color:#e7c56f;
+}
+
+.unlock p{
+    color:#8498aa;
+    font-size:13px;
+    line-height:1.7;
+}
+
+/* RECOMPENSAS */
+
+.rewards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.reward{
+    padding:22px;
+    text-align:center;
+    border-radius:11px;
+    background:#0a141f;
+    border:1px solid #23394d;
+}
+
+.reward-icon{
+    font-size:31px;
+    margin-bottom:12px;
+}
+
+.reward strong{
+    display:block;
+    color:#dce9f2;
+    margin-bottom:7px;
+}
+
+.reward p{
+    color:#7890a2;
+    font-size:12px;
+    line-height:1.5;
+}
+
+/* AVISO */
+
+.info-box{
+    margin-top:35px;
+    border-left:4px solid var(--blue);
+    background:#0a1622;
+    padding:23px 25px;
+    border-radius:7px;
+}
+
+.info-box strong{
+    color:#4fc0ff;
+}
+
+.info-box p{
+    margin-top:8px;
+    color:#8398aa;
+    font-size:13px;
+    line-height:1.65;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid #1e3041;
+    background:#050a10;
+    text-align:center;
+    padding:30px;
+    color:#5e7385;
+    font-size:13px;
+}
+
+@media(max-width:800px){
+
+    header{
+        padding:0 20px;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .mission-hero{
+        padding:30px;
+    }
+
+    .mission-hero h1{
+        font-size:34px;
+    }
+
+    .mission-grid,
+    .rewards,
+    .points-box{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a href="../" class="brand">
+
+    <img src="../logo-valhalla.png.png" alt="Poké Valhalla">
+
+    <div class="brand-text">
+        POKÉ <span>VALHALLA</span>
+    </div>
+
+</a>
+
+<nav>
+    <a href="../">Início</a>
+    <a href="../pokedex/">Pokédex</a>
+    <a href="#">Mapa</a>
+    <a href="#">Sistemas</a>
+    <a href="#">Quests</a>
+    <a href="#">Guias</a>
+</nav>
+
+</header>
+
+
+<main class="container">
+
+<a href="../" class="back">← Voltar para a página principal</a>
+
+
+<section class="mission-hero">
+
+    <div class="hero-content">
+
+        <div class="mission-symbol">📜</div>
+
+        <h1>Sistema de <span>Missões</span></h1>
+
+        <div class="subtitle">
+            Novos objetivos surgem conforme sua jornada avança.
+        </div>
+
+        <p>
+            O Sistema de Missões apresenta desafios que poderão ser
+            completados durante sua aventura pelo mundo de Valhalla.
+            Avance nos objetivos, acompanhe seu progresso e conquiste
+            novas recompensas.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="section-title">
+    <small>SUA JORNADA</small>
+    <h2>Como funcionam as Missões</h2>
+</div>
+
+
+<section class="mission-grid">
+
+    <div class="mission-card">
+
+        <span class="mission-number">01</span>
+
+        <div class="mission-icon">🔎</div>
+
+        <h3>Descubra</h3>
+
+        <p>
+            Encontre as missões disponíveis e descubra quais
+            desafios poderão fazer parte da sua jornada.
+        </p>
+
+    </div>
+
+
+    <div class="mission-card">
+
+        <span class="mission-number">02</span>
+
+        <div class="mission-icon">⚔️</div>
+
+        <h3>Progrida</h3>
+
+        <p>
+            Complete os objetivos necessários enquanto acompanha
+            o avanço da missão durante sua aventura.
+        </p>
+
+    </div>
+
+
+    <div class="mission-card">
+
+        <span class="mission-number">03</span>
+
+        <div class="mission-icon">🏆</div>
+
+        <h3>Conquiste</h3>
+
+        <p>
+            Complete os desafios e avance pelo sistema para
+            conquistar as recompensas disponíveis.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="section-title">
+    <small>PROGRESSO</small>
+    <h2>Acompanhe seus objetivos</h2>
+</div>
+
+
+<section class="progress-panel">
+
+    <div class="progress-header">
+
+        <strong>Exemplo de missão</strong>
+
+        <span class="progress-status">
+            EM PROGRESSO
+        </span>
+
+    </div>
+
+
+    <div class="progress-content">
+
+        <div class="progress-title">
+            ⚔️ Objetivo atual
+        </div>
+
+        <div class="progress-info">
+
+            <span>Progresso</span>
+
+            <span>42%</span>
+
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
+
+
+        <div class="points-box">
+
+            <div class="point-card">
+
+                <small>Progresso da missão</small>
+
+                <strong>🎯 Objetivos</strong>
+
+            </div>
+
+
+            <div class="point-card">
+
+                <small>Progressão especial</small>
+
+                <strong>🏅 Mission Points</strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="unlock">
+
+    <div class="unlock-header">
+
+        <div class="lock">🔒</div>
+
+        <div>
+            <h3>Desbloqueio de Missões</h3>
+        </div>
+
+    </div>
+
+    <p>
+        Algumas missões poderão exigir Mission Points para serem
+        desbloqueadas. Conforme você progride pelo sistema, novos
+        desafios poderão se tornar disponíveis.
+    </p>
+
+</section>
+
+
+<div class="section-title">
+    <small>RECOMPENSAS</small>
+    <h2>O que você poderá conquistar</h2>
+</div>
+
+
+<section class="rewards">
+
+    <div class="reward">
+
+        <div class="reward-icon">🎁</div>
+
+        <strong>Itens</strong>
+
+        <p>
+            Algumas missões poderão oferecer itens como recompensa.
+        </p>
+
+    </div>
+
+
+    <div class="reward">
+
+        <div class="reward-icon">⭐</div>
+
+        <strong>Experiência</strong>
+
+        <p>
+            Determinados desafios poderão conceder experiência
+            ao serem concluídos.
+        </p>
+
+    </div>
+
+
+    <div class="reward">
+
+        <div class="reward-icon">🏅</div>
+
+        <strong>Progressão</strong>
+
+        <p>
+            Avance pelo sistema e utilize seus pontos para
+            descobrir novos desafios.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="info-box">
+
+    <strong>📌 Conteúdo em desenvolvimento</strong>
+
+    <p>
+        Missões específicas, objetivos, requisitos e recompensas
+        serão adicionados à Wiki conforme o conteúdo oficial do
+        Poké Valhalla for definido. Algumas descobertas continuarão
+        reservadas para dentro do jogo.
+    </p>
+
+</div>
+
+</main>
+
+
+<footer>
+
+    <strong>Poké Valhalla Wiki</strong>
+
+    <br><br>
+
+    Explore. Descubra. Escreva sua história em Valhalla.
+
+</footer>
+
+</body>
+</html>
