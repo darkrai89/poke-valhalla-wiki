@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Addons | Poké Valhalla Wiki</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#05090f;
+    --panel:#0b121c;
+    --panel2:#101a27;
+    --border:#26384c;
+    --blue:#24a8ff;
+    --gold:#e7b94d;
+    --text:#dbe6ef;
+    --muted:#8497a8;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 50% 0%,#10223a 0%,#07101b 30%,#05090f 70%);
+    color:var(--text);
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    height:82px;
+    background:rgba(5,10,17,.96);
+    border-bottom:1px solid #23364a;
+    display:flex;
+    align-items:center;
+    padding:0 45px;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    text-decoration:none;
+    color:white;
+}
+
+.brand img{
+    width:65px;
+    height:65px;
+    object-fit:contain;
+}
+
+.brand-text{
+    font-weight:bold;
+    font-size:20px;
+    letter-spacing:1px;
+}
+
+.brand-text span{
+    color:var(--blue);
+}
+
+nav{
+    margin-left:55px;
+    display:flex;
+    gap:28px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#aebdca;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:var(--blue);
+}
+
+/* CONTEÚDO */
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+    padding:45px 0 80px;
+}
+
+.back{
+    display:inline-block;
+    margin-bottom:25px;
+    color:#8298aa;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.back:hover{
+    color:var(--blue);
+}
+
+/* HERO */
+
+.addon-hero{
+    min-height:340px;
+    border:1px solid #28445e;
+    border-radius:18px;
+    padding:50px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+
+    background:
+        radial-gradient(circle at 80% 45%,rgba(36,168,255,.14),transparent 28%),
+        radial-gradient(circle at 25% 15%,rgba(231,185,77,.08),transparent 30%),
+        linear-gradient(120deg,#0c1926,#07101a);
+}
+
+.addon-hero::after{
+    content:"✦";
+    position:absolute;
+    right:70px;
+    font-size:190px;
+    color:rgba(36,168,255,.05);
+}
+
+.hero-content{
+    max-width:650px;
+    position:relative;
+    z-index:2;
+}
+
+.hero-icon{
+    width:80px;
+    height:80px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:18px;
+    background:rgba(36,168,255,.08);
+    border:1px solid rgba(36,168,255,.25);
+    font-size:38px;
+    margin-bottom:20px;
+}
+
+.addon-hero h1{
+    font-size:44px;
+    color:white;
+    margin-bottom:8px;
+}
+
+.addon-hero h1 span{
+    color:var(--blue);
+}
+
+.subtitle{
+    color:#61c6ff;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.addon-hero p{
+    color:#9aabba;
+    line-height:1.75;
+    font-size:15px;
+}
+
+/* TITULOS */
+
+.section-title{
+    margin-top:45px;
+    margin-bottom:20px;
+}
+
+.section-title small{
+    color:var(--blue);
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.section-title h2{
+    color:white;
+    font-size:25px;
+    margin-top:6px;
+}
+
+/* COMO FUNCIONA */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.step{
+    min-height:190px;
+    padding:25px;
+    border-radius:12px;
+    background:linear-gradient(145deg,#0e1824,#09121c);
+    border:1px solid #263b50;
+    transition:.25s;
+}
+
+.step:hover{
+    transform:translateY(-4px);
+    border-color:#168bd5;
+}
+
+.step-icon{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.step h3{
+    color:#4fc0ff;
+    margin-bottom:10px;
+    font-size:17px;
+}
+
+.step p{
+    color:#8498aa;
+    font-size:13px;
+    line-height:1.65;
+}
+
+/* GALERIA */
+
+.addon-gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.addon-card{
+    min-height:260px;
+    border-radius:12px;
+    border:1px solid #263b50;
+    background:#09131e;
+    overflow:hidden;
+    transition:.25s;
+}
+
+.addon-card:hover{
+    transform:translateY(-4px);
+    border-color:#168bd5;
+}
+
+.addon-preview{
+    height:165px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle,rgba(36,168,255,.12),transparent 45%),
+        #0c1824;
+    border-bottom:1px solid #20384c;
+    font-size:55px;
+}
+
+.addon-info{
+    padding:18px;
+}
+
+.addon-info h3{
+    color:#dce9f2;
+    font-size:16px;
+    margin-bottom:7px;
+}
+
+.addon-info p{
+    color:#7890a2;
+    font-size:12px;
+    line-height:1.55;
+}
+
+.status{
+    display:inline-block;
+    margin-top:12px;
+    padding:5px 9px;
+    border-radius:5px;
+    background:rgba(36,168,255,.08);
+    border:1px solid rgba(36,168,255,.18);
+    color:#4fc0ff;
+    font-size:10px;
+    font-weight:bold;
+}
+
+/* VISUALIZAÇÃO */
+
+.preview-system{
+    margin-top:20px;
+    padding:30px;
+    border:1px solid #284158;
+    border-radius:13px;
+    background:
+        radial-gradient(circle at 80% 50%,rgba(0,126,255,.08),transparent 25%),
+        #09131e;
+    display:grid;
+    grid-template-columns:170px 1fr;
+    gap:30px;
+    align-items:center;
+}
+
+.preview-character{
+    height:170px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    border:1px solid #29445c;
+    background:#0c1925;
+    font-size:65px;
+}
+
+.preview-text h3{
+    color:white;
+    margin-bottom:10px;
+}
+
+.preview-text p{
+    color:#8398aa;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.controls{
+    display:flex;
+    gap:8px;
+    margin-top:18px;
+}
+
+.control{
+    border:1px solid #29445c;
+    background:#0c1a27;
+    color:#7fcfff;
+    padding:8px 13px;
+    border-radius:6px;
+    font-size:12px;
+}
+
+/* AVISO */
+
+.info-box{
+    margin-top:35px;
+    border-left:4px solid var(--blue);
+    background:#0a1622;
+    padding:23px 25px;
+    border-radius:7px;
+}
+
+.info-box strong{
+    color:#4fc0ff;
+}
+
+.info-box p{
+    margin-top:8px;
+    color:#8398aa;
+    font-size:13px;
+    line-height:1.65;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid #1e3041;
+    background:#050a10;
+    text-align:center;
+    padding:30px;
+    color:#5e7385;
+    font-size:13px;
+}
+
+@media(max-width:800px){
+
+    header{
+        padding:0 20px;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .addon-hero{
+        padding:30px;
+    }
+
+    .addon-hero h1{
+        font-size:34px;
+    }
+
+    .steps,
+    .addon-gallery{
+        grid-template-columns:1fr;
+    }
+
+    .preview-system{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a href="../" class="brand">
+
+    <img src="../logo-valhalla.png.png" alt="Poké Valhalla">
+
+    <div class="brand-text">
+        POKÉ <span>VALHALLA</span>
+    </div>
+
+</a>
+
+<nav>
+    <a href="../">Início</a>
+    <a href="../pokedex/">Pokédex</a>
+    <a href="#">Mapa</a>
+    <a href="#">Sistemas</a>
+    <a href="#">Quests</a>
+    <a href="#">Guias</a>
+</nav>
+
+</header>
+
+
+<main class="container">
+
+<a href="../" class="back">← Voltar para a página principal</a>
+
+
+<section class="addon-hero">
+
+    <div class="hero-content">
+
+        <div class="hero-icon">✨</div>
+
+        <h1>Sistema de <span>Addons</span></h1>
+
+        <div class="subtitle">
+            Um novo visual para acompanhar sua jornada.
+        </div>
+
+        <p>
+            Os Addons permitem encontrar diferentes aparências
+            disponíveis dentro do universo de Poké Valhalla.
+            Visualize as opções e descubra novos estilos durante
+            sua aventura.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="section-title">
+    <small>PERSONALIZAÇÃO</small>
+    <h2>Como funciona</h2>
+</div>
+
+
+<section class="steps">
+
+    <div class="step">
+
+        <div class="step-icon">🔍</div>
+
+        <h3>Explore</h3>
+
+        <p>
+            Consulte as opções disponíveis e descubra quais
+            Pokémon possuem aparências alternativas.
+        </p>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-icon">👁️</div>
+
+        <h3>Visualize</h3>
+
+        <p>
+            Navegue entre os Addons e visualize a aparência
+            antes de selecionar uma opção.
+        </p>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-icon">✨</div>
+
+        <h3>Personalize</h3>
+
+        <p>
+            Escolha entre as opções disponíveis e dê um novo
+            visual à sua jornada em Valhalla.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="section-title">
+    <small>CATÁLOGO</small>
+    <h2>Addons disponíveis</h2>
+</div>
+
+
+<section class="addon-gallery">
+
+    <div class="addon-card">
+
+        <div class="addon-preview">?</div>
+
+        <div class="addon-info">
+
+            <h3>Novos Addons</h3>
+
+            <p>
+                O catálogo oficial será adicionado conforme
+                os Addons forem definidos para o lançamento.
+            </p>
+
+            <span class="status">EM DESENVOLVIMENTO</span>
+
+        </div>
+
+    </div>
+
+
+    <div class="addon-card">
+
+        <div class="addon-preview">✦</div>
+
+        <div class="addon-info">
+
+            <h3>Mais opções em breve</h3>
+
+            <p>
+                Novas aparências poderão ser incorporadas
+                ao catálogo durante o desenvolvimento.
+            </p>
+
+            <span class="status">EM BREVE</span>
+
+        </div>
+
+    </div>
+
+
+    <div class="addon-card">
+
+        <div class="addon-preview">🔒</div>
+
+        <div class="addon-info">
+
+            <h3>Descubra em Valhalla</h3>
+
+            <p>
+                Nem todo conteúdo precisa ser revelado.
+                Algumas novidades poderão ser descobertas no jogo.
+            </p>
+
+            <span class="status">DESCUBRA</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="section-title">
+    <small>VISUALIZAÇÃO</small>
+    <h2>Escolha seu visual</h2>
+</div>
+
+
+<section class="preview-system">
+
+    <div class="preview-character">
+        ✦
+    </div>
+
+    <div class="preview-text">
+
+        <h3>Visualização de Addons</h3>
+
+        <p>
+            O sistema permite navegar pelas opções disponíveis
+            para visualizar diferentes aparências antes de
+            escolher seu Addon.
+        </p>
+
+        <div class="controls">
+
+            <span class="control">← Anterior</span>
+            <span class="control">Próximo →</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="info-box">
+
+    <strong>📌 Catálogo em construção</strong>
+
+    <p>
+        Os Pokémon e Addons disponíveis serão adicionados aqui
+        conforme o conteúdo oficial do Poké Valhalla for definido.
+        A Wiki mostrará apenas as informações destinadas aos jogadores,
+        mantendo conteúdos internos e descobertas especiais dentro do jogo.
+    </p>
+
+</div>
+
+</main>
+
+
+<footer>
+
+    <strong>Poké Valhalla Wiki</strong>
+
+    <br><br>
+
+    Explore. Descubra. Escreva sua história em Valhalla.
+
+</footer>
+
+</body>
+</html>
