@@ -697,6 +697,81 @@ footer{
         display:none;
     }
 }
+/* EQUIPE VALHALLA - LATERAL DIREITA */
+
+.staff-home-card{
+    position:relative;
+    overflow:hidden;
+}
+
+.staff-home-card::before{
+    content:"";
+    position:absolute;
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    background:rgba(0,140,255,.08);
+    right:-55px;
+    top:-55px;
+}
+
+.staff-home-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+    position:relative;
+    z-index:2;
+}
+
+.staff-home-header img{
+    width:48px;
+    height:48px;
+    object-fit:contain;
+}
+
+.staff-home-header h2{
+    color:white;
+    font-size:18px;
+    margin:0 0 4px;
+}
+
+.staff-home-header span{
+    color:#71879b;
+    font-size:12px;
+}
+
+.staff-home-card p{
+    color:#8397a9;
+    font-size:13px;
+    line-height:1.55;
+    margin-bottom:16px;
+    position:relative;
+    z-index:2;
+}
+
+.staff-home-button{
+    display:block;
+    padding:11px;
+    text-align:center;
+    text-decoration:none;
+    color:#4fc0ff;
+    font-size:13px;
+    font-weight:bold;
+    border:1px solid #285276;
+    border-radius:7px;
+    background:rgba(0,126,255,.08);
+    transition:.2s;
+    position:relative;
+    z-index:2;
+}
+
+.staff-home-button:hover{
+    color:white;
+    border-color:var(--blue);
+    background:rgba(0,126,255,.18);
+    transform:translateY(-2px);
+}
 </style>
 </head>
 
@@ -993,7 +1068,33 @@ evoluções, movimentos e muito mais.
 </div>
 
 
-<div class="box quick">
+<!-- EQUIPE VALHALLA -->
+
+<div class="box staff-home-card">
+
+    <div class="staff-home-header">
+
+        <img src="icone-equipe-valhalla.png" alt="Equipe Valhalla">
+
+        <div>
+            <h2>👥 Equipe Valhalla</h2>
+            <span>Conheça nossa equipe</span>
+        </div>
+
+    </div>
+
+    <p>
+        Conheça a equipe responsável por construir,
+        organizar e cuidar do mundo de Valhalla.
+    </p>
+
+    <a href="staff/" class="staff-home-button">
+        Conhecer nossa equipe →
+    </a>
+
+</div>
+    
+    <div class="box quick">
 
 <div class="section-title">
 <h2>🏆 Salão da Bravura</h2>
