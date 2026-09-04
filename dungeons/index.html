@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dungeons | Poké Valhalla Wiki</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#05090f;
+    --panel:#0b121c;
+    --panel2:#101a27;
+    --border:#26384c;
+    --blue:#24a8ff;
+    --blue2:#006eff;
+    --gold:#e7b94d;
+    --text:#dbe6ef;
+    --muted:#8497a8;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 50% 0%,#10223a 0%,#07101b 30%,#05090f 70%);
+    color:var(--text);
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    height:82px;
+    background:rgba(5,10,17,.96);
+    border-bottom:1px solid #23364a;
+    display:flex;
+    align-items:center;
+    padding:0 45px;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    text-decoration:none;
+    color:white;
+}
+
+.brand img{
+    width:65px;
+    height:65px;
+    object-fit:contain;
+}
+
+.brand-text{
+    font-weight:bold;
+    font-size:20px;
+    letter-spacing:1px;
+}
+
+.brand-text span{
+    color:var(--blue);
+}
+
+nav{
+    margin-left:55px;
+    display:flex;
+    gap:28px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#aebdca;
+    font-size:14px;
+    transition:.2s;
+}
+
+nav a:hover{
+    color:var(--blue);
+}
+
+/* CONTEÚDO */
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+    padding:45px 0 80px;
+}
+
+/* VOLTAR */
+
+.back{
+    display:inline-block;
+    margin-bottom:25px;
+    color:#8298aa;
+    text-decoration:none;
+    font-size:13px;
+    transition:.2s;
+}
+
+.back:hover{
+    color:var(--blue);
+}
+
+/* HERO */
+
+.dungeon-hero{
+    position:relative;
+    min-height:370px;
+    overflow:hidden;
+    border:1px solid #28445e;
+    border-radius:18px;
+    background:
+        radial-gradient(circle at 70% 50%,rgba(0,126,255,.20),transparent 35%),
+        linear-gradient(120deg,#0b1724,#07101a);
+    display:flex;
+    align-items:center;
+    padding:50px;
+}
+
+.dungeon-hero::before{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    right:-120px;
+    top:-120px;
+    border-radius:50%;
+    background:rgba(0,126,255,.06);
+}
+
+.hero-text{
+    max-width:600px;
+    position:relative;
+    z-index:2;
+}
+
+.hero-icon{
+    width:115px;
+    height:115px;
+    object-fit:contain;
+    margin-bottom:15px;
+    filter:drop-shadow(0 0 18px rgba(36,168,255,.25));
+}
+
+.dungeon-hero h1{
+    color:white;
+    font-size:44px;
+    margin-bottom:8px;
+}
+
+.dungeon-hero h1 span{
+    color:var(--blue);
+}
+
+.subtitle{
+    color:#54bfff;
+    font-size:16px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.dungeon-hero p{
+    color:#9aabba;
+    line-height:1.75;
+    font-size:15px;
+}
+
+/* TIMER DECORATIVO */
+
+.timer{
+    position:absolute;
+    right:55px;
+    bottom:40px;
+    font-size:45px;
+    font-weight:bold;
+    letter-spacing:5px;
+    color:rgba(79,192,255,.16);
+    user-select:none;
+}
+
+/* TÍTULO */
+
+.section-title{
+    margin-top:45px;
+    margin-bottom:20px;
+}
+
+.section-title small{
+    color:var(--blue);
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.section-title h2{
+    color:white;
+    font-size:25px;
+    margin-top:6px;
+}
+
+/* CARDS */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.info-card{
+    background:linear-gradient(145deg,#0e1824,#09121c);
+    border:1px solid #263b50;
+    border-radius:12px;
+    padding:25px;
+    min-height:190px;
+    transition:.25s;
+}
+
+.info-card:hover{
+    transform:translateY(-4px);
+    border-color:#168bd5;
+}
+
+.info-icon{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.info-card h3{
+    color:#4fc0ff;
+    font-size:17px;
+    margin-bottom:10px;
+}
+
+.info-card p{
+    color:#8498aa;
+    font-size:13px;
+    line-height:1.65;
+}
+
+/* SEM SPOILER */
+
+.mystery{
+    margin-top:35px;
+    padding:30px;
+    border:1px solid #253d54;
+    border-radius:12px;
+    background:
+        radial-gradient(circle at 90% 50%,rgba(0,126,255,.08),transparent 30%),
+        #09121c;
+}
+
+.mystery h2{
+    color:white;
+    margin-bottom:10px;
+    font-size:20px;
+}
+
+.mystery p{
+    color:#879aaa;
+    line-height:1.7;
+    font-size:14px;
+}
+
+/* DUNGEONS */
+
+.dungeon-list{
+    margin-top:20px;
+}
+
+.unknown-dungeon{
+    border:1px dashed #29455f;
+    border-radius:12px;
+    padding:35px;
+    text-align:center;
+    background:#08111b;
+}
+
+.question{
+    font-size:42px;
+    color:#376582;
+    margin-bottom:12px;
+}
+
+.unknown-dungeon h3{
+    color:#c5d5e0;
+    margin-bottom:8px;
+}
+
+.unknown-dungeon p{
+    color:#667f92;
+    font-size:13px;
+}
+
+/* STATUS */
+
+.status-box{
+    margin-top:35px;
+    border-left:4px solid var(--blue);
+    background:#0a1622;
+    padding:22px 25px;
+    border-radius:7px;
+}
+
+.status-box strong{
+    color:#4fc0ff;
+}
+
+.status-box p{
+    color:#8398aa;
+    margin-top:7px;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid #1e3041;
+    background:#050a10;
+    text-align:center;
+    padding:30px;
+    color:#5e7385;
+    font-size:13px;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:800px){
+
+    header{
+        padding:0 20px;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .dungeon-hero{
+        padding:30px;
+    }
+
+    .dungeon-hero h1{
+        font-size:34px;
+    }
+
+    .timer{
+        display:none;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a href="../" class="brand">
+
+    <img src="../logo-valhalla.png.png" alt="Poké Valhalla">
+
+    <div class="brand-text">
+        POKÉ <span>VALHALLA</span>
+    </div>
+
+</a>
+
+<nav>
+    <a href="../">Início</a>
+    <a href="../pokedex/">Pokédex</a>
+    <a href="#">Mapa</a>
+    <a href="#">Sistemas</a>
+    <a href="#">Quests</a>
+    <a href="#">Guias</a>
+</nav>
+
+</header>
+
+<main class="container">
+
+<a href="../" class="back">← Voltar para a página principal</a>
+
+
+<section class="dungeon-hero">
+
+    <div class="hero-text">
+
+        <img
+            src="../icone-dungeons.png"
+            alt="Dungeons"
+            class="hero-icon"
+        >
+
+        <h1><span>Dungeons</span></h1>
+
+        <div class="subtitle">
+            Entre. Supere o desafio. Saia antes que o tempo acabe.
+        </div>
+
+        <p>
+            As Dungeons são desafios especiais encontrados durante
+            sua jornada em Valhalla. Ao entrar, prepare-se para enfrentar
+            situações diferentes das hunts tradicionais, enquanto o tempo
+            acompanha cada momento do desafio.
+        </p>
+
+    </div>
+
+    <div class="timer">00:00</div>
+
+</section>
+
+
+<div class="section-title">
+
+    <small>COMO FUNCIONA</small>
+
+    <h2>Prepare-se para o desafio</h2>
+
+</div>
+
+
+<section class="info-grid">
+
+    <div class="info-card">
+
+        <div class="info-icon">🏰</div>
+
+        <h3>Entre no desconhecido</h3>
+
+        <p>
+            Cada Dungeon representa um desafio especial.
+            Entre preparado e descubra durante a aventura
+            o que estará esperando por você.
+        </p>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <div class="info-icon">⏳</div>
+
+        <h3>Fique de olho no tempo</h3>
+
+        <p>
+            Durante o desafio, o tempo será uma informação
+            importante. A interface acompanhará o andamento
+            da Dungeon enquanto você avança.
+        </p>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <div class="info-icon">👹</div>
+
+        <h3>Acompanhe seu progresso</h3>
+
+        <p>
+            Informações relacionadas aos desafios e criaturas
+            enfrentadas poderão ser apresentadas durante sua
+            passagem pela Dungeon.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="mystery">
+
+    <h2>🔒 Nem tudo será revelado</h2>
+
+    <p>
+        A Wiki Valhalla apresentará as informações necessárias
+        para que os treinadores compreendam o sistema, mas parte
+        da experiência continuará sendo descoberta dentro do jogo.
+        Alguns desafios foram feitos para serem explorados.
+    </p>
+
+</section>
+
+
+<div class="section-title">
+
+    <small>EXPLORAÇÃO</small>
+
+    <h2>Dungeons disponíveis</h2>
+
+</div>
+
+
+<section class="dungeon-list">
+
+    <div class="unknown-dungeon">
+
+        <div class="question">?</div>
+
+        <h3>Novos desafios aguardam por você</h3>
+
+        <p>
+            As Dungeons e suas informações serão reveladas
+            conforme o mundo de Poké Valhalla evoluir.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="status-box">
+
+    <strong>📌 Sistema em desenvolvimento</strong>
+
+    <p>
+        O sistema de Dungeons poderá receber novos desafios,
+        ajustes e conteúdos durante o desenvolvimento do Poké Valhalla.
+        Esta página será atualizada conforme novas informações
+        forem disponibilizadas.
+    </p>
+
+</div>
+
+</main>
+
+
+<footer>
+
+    <strong>Poké Valhalla Wiki</strong>
+
+    <br><br>
+
+    Explore. Descubra. Escreva sua história em Valhalla.
+
+</footer>
+
+</body>
+</html>
