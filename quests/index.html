@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Quests | Poké Valhalla</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, #163d64 0%, #081827 38%, #030a11 100%);
+      color: #eaf6ff;
+      min-height: 100vh;
+    }
+
+    /* =========================
+       CABEÇALHO
+    ========================== */
+
+    .topo {
+      min-height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 45px 20px;
+      border-bottom: 1px solid rgba(91, 190, 255, .25);
+      background:
+        linear-gradient(rgba(3, 14, 24, .35), rgba(3, 14, 24, .92)),
+        radial-gradient(circle at center, rgba(31, 130, 197, .35), transparent 60%);
+    }
+
+    .topo-conteudo {
+      max-width: 850px;
+    }
+
+    .topo-tag {
+      display: inline-block;
+      padding: 7px 15px;
+      margin-bottom: 15px;
+      border: 1px solid #52bfff;
+      border-radius: 30px;
+      color: #8ed8ff;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .topo h1 {
+      font-size: 46px;
+      margin-bottom: 10px;
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(64, 174, 255, .4);
+    }
+
+    .topo p {
+      color: #a9c4d8;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* =========================
+       CONTEÚDO
+    ========================== */
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 35px auto 70px;
+    }
+
+    .voltar {
+      display: inline-block;
+      color: #81cfff;
+      text-decoration: none;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+
+    .voltar:hover {
+      color: white;
+    }
+
+    .titulo-area {
+      margin-bottom: 22px;
+    }
+
+    .titulo-area h2 {
+      font-size: 25px;
+      margin-bottom: 6px;
+    }
+
+    .titulo-area p {
+      color: #7895a9;
+      font-size: 14px;
+    }
+
+    /* =========================
+       FILTROS
+    ========================== */
+
+    .filtros {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 28px;
+    }
+
+    .filtro {
+      border: 1px solid #244961;
+      background: #0b1d2b;
+      color: #8ba8ba;
+      padding: 9px 15px;
+      border-radius: 7px;
+      font-size: 12px;
+      cursor: default;
+    }
+
+    .filtro.ativo {
+      background: #123b57;
+      border-color: #45b8ff;
+      color: white;
+    }
+
+    /* =========================
+       BARRAS DAS QUESTS
+    ========================== */
+
+    .lista-quests {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .quest {
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      align-items: center;
+      gap: 18px;
+
+      min-height: 92px;
+      padding: 13px 18px;
+
+      background:
+        linear-gradient(90deg, rgba(17, 47, 68, .96), rgba(7, 23, 34, .96));
+
+      border: 1px solid #1d435b;
+      border-left: 4px solid #39aef5;
+      border-radius: 9px;
+
+      transition: .2s ease;
+    }
+
+    .quest:hover {
+      transform: translateX(4px);
+      border-color: #42baff;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, .3);
+    }
+
+    .quest-icone {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 8px;
+      background: #07131d;
+      border: 1px solid #27516a;
+
+      font-size: 29px;
+    }
+
+    .quest-info h3 {
+      font-size: 17px;
+      margin-bottom: 7px;
+      color: #f3fbff;
+    }
+
+    .quest-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 7px;
+    }
+
+    .tag {
+      padding: 4px 8px;
+      border-radius: 5px;
+      background: rgba(54, 157, 219, .12);
+      border: 1px solid rgba(69, 177, 242, .22);
+      color: #8ed4fc;
+      font-size: 11px;
+    }
+
+    .quest-info p {
+      color: #819dad;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .quest-botao {
+      min-width: 115px;
+      text-align: center;
+      text-decoration: none;
+      padding: 10px 14px;
+
+      border-radius: 7px;
+      border: 1px solid #3086b9;
+
+      color: #a9ddff;
+      background: rgba(29, 113, 165, .12);
+
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .quest-botao:hover {
+      background: #168bd0;
+      color: white;
+    }
+
+    /* =========================
+       EM DESENVOLVIMENTO
+    ========================== */
+
+    .aviso {
+      margin-top: 35px;
+      padding: 22px;
+      border-radius: 10px;
+
+      background: rgba(7, 27, 40, .85);
+      border: 1px solid #23475e;
+
+      text-align: center;
+    }
+
+    .aviso strong {
+      display: block;
+      color: #80d0ff;
+      margin-bottom: 7px;
+    }
+
+    .aviso p {
+      color: #7895a8;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    footer {
+      border-top: 1px solid #132d3d;
+      padding: 25px;
+      text-align: center;
+      color: #526d7e;
+      font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .topo h1 {
+        font-size: 34px;
+      }
+
+      .quest {
+        grid-template-columns: 55px 1fr;
+      }
+
+      .quest-icone {
+        width: 50px;
+        height: 50px;
+      }
+
+      .quest-botao {
+        grid-column: 1 / -1;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topo">
+    <div class="topo-conteudo">
+
+      <span class="topo-tag">Poké Valhalla Wiki</span>
+
+      <h1>⚔️ Quests</h1>
+
+      <p>
+        Explore desafios espalhados pelo mundo de Valhalla.
+        Enfrente criaturas poderosas, descubra mistérios e conquiste
+        recompensas durante sua jornada.
+      </p>
+
+    </div>
+  </header>
+
+  <main class="container">
+
+    <a class="voltar" href="../">← Voltar para a Wiki</a>
+
+    <div class="titulo-area">
+      <h2>Lista de Quests</h2>
+      <p>
+        Selecione uma quest para consultar informações, requisitos e recompensas.
+      </p>
+    </div>
+
+    <div class="filtros">
+      <span class="filtro ativo">Todas</span>
+      <span class="filtro">Iniciais</span>
+      <span class="filtro">Intermediárias</span>
+      <span class="filtro">Avançadas</span>
+      <span class="filtro">Grupo</span>
+      <span class="filtro">Especiais</span>
+    </div>
+
+    <section class="lista-quests">
+
+      <!-- MYSTERIOUS -->
+      <article class="quest">
+
+        <div class="quest-icone">🔮</div>
+
+        <div class="quest-info">
+          <h3>Mysterious Quest</h3>
+
+          <div class="quest-meta">
+            <span class="tag">Quest em etapas</span>
+            <span class="tag">Mistério</span>
+            <span class="tag">Avançada</span>
+          </div>
+
+          <p>
+            Descubra os segredos dos antigos amuletos e avance
+            por um dos mistérios de Valhalla.
+          </p>
+        </div>
+
+        <a class="quest-botao" href="#">Ver Quest →</a>
+
+      </article>
+
+      <!-- CONQUEST -->
+      <article class="quest">
+
+        <div class="quest-icone">🛡️</div>
+
+        <div class="quest-info">
+          <h3>Conquest Quest</h3>
+
+          <div class="quest-meta">
+            <span class="tag">Grupo</span>
+            <span class="tag">4 jogadores</span>
+            <span class="tag">Avançada</span>
+          </div>
+
+          <p>
+            Um desafio criado para treinadores preparados para
+            enfrentar Valhalla em equipe.
+          </p>
+        </div>
+
+        <a class="quest-botao" href="#">Ver Quest →</a>
+
+      </article>
+
+      <!-- PALKIA -->
+      <article class="quest">
+
+        <div class="quest-icone">💠</div>
+
+        <div class="quest-info">
+          <h3>Palkia Quest</h3>
+
+          <div class="quest-meta">
+            <span class="tag">Grupo</span>
+            <span class="tag">4 jogadores</span>
+            <span class="tag">Lendário</span>
+          </div>
+
+          <p>
+            Uma jornada de alto nível ligada a uma das criaturas
+            lendárias existentes em Valhalla.
+          </p>
+        </div>
+
+        <a class="quest-botao" href="#">Ver Quest →</a>
+
+      </article>
+
+      <!-- BURNED -->
+      <article class="quest">
+
+        <div class="quest-icone">🔥</div>
+
+        <div class="quest-info">
+          <h3>Burned Quest</h3>
+
+          <div class="quest-meta">
+            <span class="tag">Itens necessários</span>
+            <span class="tag">Avançada</span>
+          </div>
+
+          <p>
+            Reúna os recursos necessários e enfrente os desafios
+            de uma região consumida pelas chamas.
+          </p>
+        </div>
+
+        <a class="quest-botao" href="#">Ver Quest →</a>
+
+      </article>
+
+      <!-- SHEDINJA -->
+      <article class="quest">
+
+        <div class="quest-icone">👁️</div>
+
+        <div class="quest-info">
+          <h3>Shedinja Quest</h3>
+
+          <div class="quest-meta">
+            <span class="tag">Ritual</span>
+            <span class="tag">Itens necessários</span>
+          </div>
+
+          <p>
+            Complete um misterioso ritual para avançar nesta
+            jornada especial.
+          </p>
+        </div>
+
+        <a class="quest-botao" href="#">Ver Quest →</a>
+
+      </article>
+
+      <!-- UNOWN -->
+      <article class="quest">
+
+        <div class="quest-icone">❓</div>
+
+        <div class="quest-info">
+          <h3>Unown Quest</h3>
+
+          <div class="quest-meta">
+            <span class="tag">Alto nível</span>
+            <span class="tag">Especial</span>
+          </div>
+
+          <p>
+            Um desafio reservado para treinadores que alcançaram
+            estágios avançados de sua jornada.
+          </p>
+        </div>
+
+        <a class="quest-botao" href="#">Ver Quest →</a>
+
+      </article>
+
+    </section>
+
+    <div class="aviso">
+
+      <strong>📜 Catálogo de Quests em desenvolvimento</strong>
+
+      <p>
+        Novas quests serão adicionadas conforme as informações
+        oficiais do Poké Valhalla forem revisadas e confirmadas.
+      </p>
+
+    </div>
+
+  </main>
+
+  <footer>
+    Poké Valhalla Wiki • Quests
+  </footer>
+
+</body>
+</html>
