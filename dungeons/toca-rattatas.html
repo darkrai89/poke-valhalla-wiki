@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Toca dos Rattata's | Poké Valhalla Wiki</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#05090f;
+    --panel:#0b121c;
+    --border:#26384c;
+    --blue:#24a8ff;
+    --text:#dbe6ef;
+    --muted:#8497a8;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 50% 0%,#10223a 0%,#07101b 30%,#05090f 70%);
+    color:var(--text);
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    height:82px;
+    background:rgba(5,10,17,.96);
+    border-bottom:1px solid #23364a;
+    display:flex;
+    align-items:center;
+    padding:0 45px;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    text-decoration:none;
+    color:white;
+}
+
+.brand img{
+    width:65px;
+    height:65px;
+    object-fit:contain;
+}
+
+.brand-text{
+    font-weight:bold;
+    font-size:20px;
+    letter-spacing:1px;
+}
+
+.brand-text span{
+    color:var(--blue);
+}
+
+nav{
+    margin-left:55px;
+    display:flex;
+    gap:28px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#aebdca;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:var(--blue);
+}
+
+/* CONTAINER */
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+    padding:42px 0 80px;
+}
+
+.back{
+    display:inline-block;
+    margin-bottom:25px;
+    color:#8298aa;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.back:hover{
+    color:var(--blue);
+}
+
+/* HERO */
+
+.hero{
+    overflow:hidden;
+    border:1px solid #28445e;
+    border-radius:18px;
+    background:#09131e;
+}
+
+.hero-image{
+    width:100%;
+    height:380px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero-image::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(to top,#09131e 0%,transparent 55%);
+}
+
+.hero-content{
+    padding:0 38px 38px;
+    position:relative;
+    margin-top:-55px;
+    z-index:2;
+}
+
+.badge{
+    display:inline-block;
+    background:#0e2c42;
+    border:1px solid #2373a4;
+    color:#5bc4ff;
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.hero h1{
+    color:white;
+    font-size:38px;
+    margin-bottom:12px;
+}
+
+.hero p{
+    max-width:720px;
+    color:#91a5b5;
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* TITULO */
+
+.section-title{
+    margin-top:40px;
+    margin-bottom:18px;
+}
+
+.section-title small{
+    color:var(--blue);
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.section-title h2{
+    color:white;
+    font-size:24px;
+    margin-top:6px;
+}
+
+/* INFO PRINCIPAL */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.stat{
+    padding:20px;
+    border:1px solid #243b50;
+    border-radius:11px;
+    background:linear-gradient(145deg,#0d1823,#08121b);
+}
+
+.stat span{
+    display:block;
+    color:#6f8799;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+    margin-bottom:8px;
+}
+
+.stat strong{
+    color:#d6e3ec;
+    font-size:14px;
+}
+
+/* SISTEMA */
+
+.system-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.system-card{
+    border:1px solid #243b50;
+    background:#09131e;
+    border-radius:11px;
+    padding:23px;
+}
+
+.system-card h3{
+    color:#50bfff;
+    font-size:16px;
+    margin-bottom:9px;
+}
+
+.system-card p{
+    color:#8297a8;
+    font-size:13px;
+    line-height:1.65;
+}
+
+/* RECOMPENSA */
+
+.reward{
+    border:1px solid #293e51;
+    border-radius:12px;
+    padding:27px;
+    background:
+        radial-gradient(circle at 90% 50%,rgba(36,168,255,.08),transparent 30%),
+        #09131e;
+}
+
+.reward h3{
+    color:white;
+    margin-bottom:10px;
+}
+
+.reward p{
+    color:#8397a8;
+    font-size:13px;
+    line-height:1.65;
+}
+
+.locked{
+    display:inline-block;
+    margin-top:15px;
+    border:1px solid #324b60;
+    background:#0b1722;
+    color:#71899c;
+    padding:8px 12px;
+    border-radius:7px;
+    font-size:11px;
+}
+
+/* AVISO */
+
+.note{
+    margin-top:35px;
+    border-left:4px solid var(--blue);
+    background:#091722;
+    padding:20px 24px;
+    border-radius:7px;
+}
+
+.note strong{
+    color:#4fc0ff;
+}
+
+.note p{
+    color:#8196a7;
+    font-size:13px;
+    margin-top:7px;
+    line-height:1.6;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid #1e3041;
+    background:#050a10;
+    text-align:center;
+    padding:30px;
+    color:#5e7385;
+    font-size:13px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    header{
+        padding:0 20px;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .hero-image{
+        height:250px;
+    }
+
+    .hero-content{
+        padding:0 22px 28px;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .system-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:480px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a href="../" class="brand">
+
+    <img src="../logo-valhalla.png.png" alt="Poké Valhalla">
+
+    <div class="brand-text">
+        POKÉ <span>VALHALLA</span>
+    </div>
+
+</a>
+
+<nav>
+    <a href="../">Início</a>
+    <a href="../pokedex/">Pokédex</a>
+    <a href="#">Mapa</a>
+    <a href="#">Sistemas</a>
+    <a href="../quests/">Quests</a>
+    <a href="#">Guias</a>
+</nav>
+
+</header>
+
+
+<main class="container">
+
+<a href="./" class="back">← Voltar para Dungeons</a>
+
+
+<section class="hero">
+
+    <div class="hero-image">
+
+        <img
+            src="img/toca-rattatas.png"
+            alt="Toca dos Rattata's"
+        >
+
+    </div>
+
+    <div class="hero-content">
+
+        <span class="badge">
+            ZONA DIMENSIONAL
+        </span>
+
+        <h1>Toca dos Rattata's</h1>
+
+        <p>
+            A Toca dos Rattata's é um dos desafios identificados
+            na Zona Dimensional de Poké Valhalla. Prepare sua equipe
+            e esteja pronto para enfrentar os desafios encontrados
+            durante a exploração da Dungeon.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="section-title">
+
+    <small>INFORMAÇÕES</small>
+
+    <h2>Dados da Dungeon</h2>
+
+</div>
+
+
+<section class="stats">
+
+    <div class="stat">
+        <span>Categoria</span>
+        <strong>Iniciante</strong>
+    </div>
+
+    <div class="stat">
+        <span>Level recomendado</span>
+        <strong>A confirmar</strong>
+    </div>
+
+    <div class="stat">
+        <span>Jogadores</span>
+        <strong>A confirmar</strong>
+    </div>
+
+    <div class="stat">
+        <span>Requisito</span>
+        <strong>A confirmar</strong>
+    </div>
+
+</section>
+
+
+<div class="section-title">
+
+    <small>DESAFIO</small>
+
+    <h2>Como funciona</h2>
+
+</div>
+
+
+<section class="system-grid">
+
+    <div class="system-card">
+
+        <h3>👥 Equipe</h3>
+
+        <p>
+            A Zona Dimensional possui suporte à formação de equipes
+            e convites entre jogadores antes do início dos desafios.
+            A quantidade específica de participantes desta Dungeon
+            ainda será confirmada.
+        </p>
+
+    </div>
+
+
+    <div class="system-card">
+
+        <h3>⏳ Tempo</h3>
+
+        <p>
+            Durante uma Dungeon, o sistema pode apresentar o tempo
+            restante do desafio para que os participantes acompanhem
+            seu progresso.
+        </p>
+
+    </div>
+
+
+    <div class="system-card">
+
+        <h3>👹 Progresso</h3>
+
+        <p>
+            A interface da Zona Dimensional possui acompanhamento
+            das criaturas durante o desafio, permitindo visualizar
+            o avanço da equipe.
+        </p>
+
+    </div>
+
+
+    <div class="system-card">
+
+        <h3>🏆 Ranking</h3>
+
+        <p>
+            O sistema da Zona Dimensional possui suporte a ranking.
+            Os critérios específicos relacionados a esta Dungeon
+            serão adicionados após confirmação.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="section-title">
+
+    <small>RECOMPENSAS</small>
+
+    <h2>Recompensas da Dungeon</h2>
+
+</div>
+
+
+<section class="reward">
+
+    <h3>🎁 Recompensas</h3>
+
+    <p>
+        A Zona Dimensional possui uma área própria para consulta
+        de recompensas. As recompensas específicas da Toca dos
+        Rattata's ainda não foram confirmadas e não serão
+        antecipadas pela Wiki.
+    </p>
+
+    <div class="locked">
+        🔒 Informações a confirmar
+    </div>
+
+</section>
+
+
+<div class="note">
+
+    <strong>📌 Informações verificadas</strong>
+
+    <p>
+        Esta página apresenta apenas informações que conseguimos
+        identificar no sistema atual de Poké Valhalla. Levels,
+        requisitos, quantidade de participantes e recompensas serão
+        adicionados quando houver confirmação.
+    </p>
+
+</div>
+
+</main>
+
+
+<footer>
+
+    <strong>Poké Valhalla Wiki</strong>
+
+    <br><br>
+
+    Explore. Descubra. Escreva sua história em Valhalla.
+
+</footer>
+
+</body>
+</html>
