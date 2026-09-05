@@ -94,12 +94,10 @@ nav a:hover{
 
 .container{
     width:92%;
-    max-width:1100px;
+    max-width:1180px;
     margin:auto;
     padding:45px 0 80px;
 }
-
-/* VOLTAR */
 
 .back{
     display:inline-block;
@@ -142,7 +140,7 @@ nav a:hover{
 }
 
 .hero-text{
-    max-width:600px;
+    max-width:620px;
     position:relative;
     z-index:2;
 }
@@ -178,8 +176,6 @@ nav a:hover{
     font-size:15px;
 }
 
-/* TIMER DECORATIVO */
-
 .timer{
     position:absolute;
     right:55px;
@@ -191,7 +187,7 @@ nav a:hover{
     user-select:none;
 }
 
-/* TÍTULO */
+/* TITULOS */
 
 .section-title{
     margin-top:45px;
@@ -210,7 +206,7 @@ nav a:hover{
     margin-top:6px;
 }
 
-/* CARDS */
+/* INFO */
 
 .info-grid{
     display:grid;
@@ -273,34 +269,163 @@ nav a:hover{
     font-size:14px;
 }
 
-/* DUNGEONS */
+/* GRID DAS DUNGEONS */
 
-.dungeon-list{
+.dungeon-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
+}
+
+/* CARD */
+
+.dungeon-card{
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(145deg,#0e1824,#08111a);
+    border:1px solid #263f56;
+    border-radius:17px;
+    transition:.25s;
+}
+
+.dungeon-card:hover{
+    transform:translateY(-5px);
+    border-color:#1b9cec;
+    box-shadow:0 12px 35px rgba(0,0,0,.35);
+}
+
+/* IMAGEM */
+
+.dungeon-image{
+    height:230px;
+    background:
+        radial-gradient(circle at center,rgba(36,168,255,.12),transparent 50%),
+        #07101a;
+    border-bottom:1px solid #20374b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.dungeon-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.35s;
+}
+
+.dungeon-card:hover .dungeon-image img{
+    transform:scale(1.03);
+}
+
+/* CONTEUDO DO CARD */
+
+.dungeon-content{
+    padding:24px;
+}
+
+.dungeon-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.dungeon-name{
+    color:white;
+    font-size:22px;
+    line-height:1.2;
+}
+
+.category{
+    display:inline-block;
+    background:#10263a;
+    border:1px solid #24587d;
+    color:#58c2ff;
+    border-radius:20px;
+    padding:6px 11px;
+    font-size:11px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.dungeon-description{
+    color:#8397a8;
+    font-size:13px;
+    line-height:1.65;
+    margin-bottom:20px;
+}
+
+/* DADOS */
+
+.dungeon-info{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.stat{
+    background:#09131e;
+    border:1px solid #1f3447;
+    border-radius:9px;
+    padding:12px;
+}
+
+.stat-label{
+    display:block;
+    color:#617c91;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+    margin-bottom:5px;
+}
+
+.stat-value{
+    color:#c8d8e4;
+    font-size:13px;
+    font-weight:bold;
+}
+
+/* FOOT DO CARD */
+
+.dungeon-actions{
+    display:flex;
+    gap:10px;
     margin-top:20px;
 }
 
-.unknown-dungeon{
-    border:1px dashed #29455f;
-    border-radius:12px;
-    padding:35px;
+.dungeon-btn{
+    flex:1;
     text-align:center;
-    background:#08111b;
+    text-decoration:none;
+    border-radius:8px;
+    padding:11px;
+    font-size:12px;
+    font-weight:bold;
+    transition:.2s;
 }
 
-.question{
-    font-size:42px;
-    color:#376582;
-    margin-bottom:12px;
+.btn-main{
+    background:linear-gradient(90deg,#087ac7,#179ee9);
+    color:white;
 }
 
-.unknown-dungeon h3{
-    color:#c5d5e0;
-    margin-bottom:8px;
+.btn-main:hover{
+    filter:brightness(1.12);
 }
 
-.unknown-dungeon p{
-    color:#667f92;
-    font-size:13px;
+.btn-secondary{
+    color:#91a8ba;
+    background:#0a1520;
+    border:1px solid #263d51;
+}
+
+.btn-secondary:hover{
+    color:#5cc7ff;
+    border-color:#2584bd;
 }
 
 /* STATUS */
@@ -337,7 +462,7 @@ footer{
 
 /* RESPONSIVO */
 
-@media(max-width:800px){
+@media(max-width:850px){
 
     header{
         padding:0 20px;
@@ -361,6 +486,25 @@ footer{
 
     .info-grid{
         grid-template-columns:1fr;
+    }
+
+    .dungeon-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:500px){
+
+    .dungeon-info{
+        grid-template-columns:1fr;
+    }
+
+    .dungeon-actions{
+        flex-direction:column;
+    }
+
+    .dungeon-image{
+        height:190px;
     }
 }
 
@@ -386,7 +530,7 @@ footer{
     <a href="../pokedex/">Pokédex</a>
     <a href="#">Mapa</a>
     <a href="#">Sistemas</a>
-    <a href="#">Quests</a>
+    <a href="../quests/">Quests</a>
     <a href="#">Guias</a>
 </nav>
 
@@ -407,17 +551,17 @@ footer{
             class="hero-icon"
         >
 
-        <h1><span>Dungeons</span></h1>
+        <h1>Zona <span>Dimensional</span></h1>
 
         <div class="subtitle">
             Entre. Supere o desafio. Saia antes que o tempo acabe.
         </div>
 
         <p>
-            As Dungeons são desafios especiais encontrados durante
-            sua jornada em Valhalla. Ao entrar, prepare-se para enfrentar
-            situações diferentes das hunts tradicionais, enquanto o tempo
-            acompanha cada momento do desafio.
+            A Zona Dimensional reúne desafios especiais de Poké Valhalla.
+            Cada Dungeon pode possuir seus próprios requisitos, quantidade
+            de participantes e desafios. Forme sua equipe, entre preparado
+            e acompanhe seu progresso enquanto o tempo corre.
         </p>
 
     </div>
@@ -440,14 +584,14 @@ footer{
 
     <div class="info-card">
 
-        <div class="info-icon">🏰</div>
+        <div class="info-icon">👥</div>
 
-        <h3>Entre no desconhecido</h3>
+        <h3>Forme sua equipe</h3>
 
         <p>
-            Cada Dungeon representa um desafio especial.
-            Entre preparado e descubra durante a aventura
-            o que estará esperando por você.
+            Algumas Dungeons permitem desafios em grupo.
+            Reúna outros treinadores e monte sua equipe antes
+            de iniciar a aventura.
         </p>
 
     </div>
@@ -457,12 +601,11 @@ footer{
 
         <div class="info-icon">⏳</div>
 
-        <h3>Fique de olho no tempo</h3>
+        <h3>Enfrente o tempo</h3>
 
         <p>
-            Durante o desafio, o tempo será uma informação
-            importante. A interface acompanhará o andamento
-            da Dungeon enquanto você avança.
+            Durante a Dungeon, o tempo restante é exibido
+            enquanto os participantes avançam pelo desafio.
         </p>
 
     </div>
@@ -475,9 +618,9 @@ footer{
         <h3>Acompanhe seu progresso</h3>
 
         <p>
-            Informações relacionadas aos desafios e criaturas
-            enfrentadas poderão ser apresentadas durante sua
-            passagem pela Dungeon.
+            O sistema acompanha o progresso das criaturas
+            enfrentadas durante a Dungeon, permitindo que a
+            equipe acompanhe o avanço do desafio.
         </p>
 
     </div>
@@ -490,10 +633,10 @@ footer{
     <h2>🔒 Nem tudo será revelado</h2>
 
     <p>
-        A Wiki Valhalla apresentará as informações necessárias
-        para que os treinadores compreendam o sistema, mas parte
-        da experiência continuará sendo descoberta dentro do jogo.
-        Alguns desafios foram feitos para serem explorados.
+        A Wiki Valhalla apresentará informações importantes sobre
+        as Dungeons, porém parte da experiência continuará sendo
+        descoberta dentro do jogo. Alguns desafios, criaturas e
+        detalhes foram feitos para serem explorados pelos treinadores.
     </p>
 
 </section>
@@ -501,40 +644,317 @@ footer{
 
 <div class="section-title">
 
-    <small>EXPLORAÇÃO</small>
+    <small>ZONA DIMENSIONAL</small>
 
-    <h2>Dungeons disponíveis</h2>
+    <h2>Dungeons conhecidas</h2>
 
 </div>
 
 
-<section class="dungeon-list">
+<section class="dungeon-grid">
 
-    <div class="unknown-dungeon">
 
-        <div class="question">?</div>
+<!-- TOCA DOS RATTATA'S -->
 
-        <h3>Novos desafios aguardam por você</h3>
+<article class="dungeon-card">
 
-        <p>
-            As Dungeons e suas informações serão reveladas
-            conforme o mundo de Poké Valhalla evoluir.
+    <div class="dungeon-image">
+        <img
+            src="img/toca-rattatas.png"
+            alt="Toca dos Rattata's"
+        >
+    </div>
+
+    <div class="dungeon-content">
+
+        <div class="dungeon-top">
+
+            <h3 class="dungeon-name">
+                Toca dos Rattata's
+            </h3>
+
+            <span class="category">
+                INICIANTE
+            </span>
+
+        </div>
+
+        <p class="dungeon-description">
+            Uma das Dungeons encontradas na Zona Dimensional.
+            Prepare sua equipe e esteja pronto para enfrentar
+            os desafios encontrados em seu interior.
         </p>
 
+        <div class="dungeon-info">
+
+            <div class="stat">
+                <span class="stat-label">Level recomendado</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-label">Jogadores</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-label">Requisito</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-label">Recompensas</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+        </div>
+
+        <div class="dungeon-actions">
+
+            <a href="#" class="dungeon-btn btn-main">
+                Ver Dungeon
+            </a>
+
+            <a href="#" class="dungeon-btn btn-secondary">
+                Recompensas
+            </a>
+
+        </div>
+
     </div>
+
+</article>
+
+
+
+<!-- BLASTOISE -->
+
+<article class="dungeon-card">
+
+    <div class="dungeon-image">
+        <img
+            src="img/blastoise.png"
+            alt="Blastoise Dungeon"
+        >
+    </div>
+
+    <div class="dungeon-content">
+
+        <div class="dungeon-top">
+
+            <h3 class="dungeon-name">
+                Blastoise
+            </h3>
+
+            <span class="category">
+                A CONFIRMAR
+            </span>
+
+        </div>
+
+        <p class="dungeon-description">
+            Uma Dungeon associada a Blastoise encontrada nos
+            arquivos do sistema da Zona Dimensional.
+        </p>
+
+        <div class="dungeon-info">
+
+            <div class="stat">
+                <span class="stat-label">Level recomendado</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-label">Jogadores</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-label">Requisito</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-label">Recompensas</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+        </div>
+
+        <div class="dungeon-actions">
+
+            <a href="#" class="dungeon-btn btn-main">
+                Ver Dungeon
+            </a>
+
+            <a href="#" class="dungeon-btn btn-secondary">
+                Recompensas
+            </a>
+
+        </div>
+
+    </div>
+
+</article>
+
+
+
+<!-- LAVA FORT -->
+
+<article class="dungeon-card">
+
+    <div class="dungeon-image">
+        <img
+            src="img/lava-fort.png"
+            alt="Lava Fort"
+        >
+    </div>
+
+    <div class="dungeon-content">
+
+        <div class="dungeon-top">
+
+            <h3 class="dungeon-name">
+                Lava Fort
+            </h3>
+
+            <span class="category">
+                A CONFIRMAR
+            </span>
+
+        </div>
+
+        <p class="dungeon-description">
+            Um dos desafios registrados no sistema de Dungeons.
+            Informações adicionais serão disponibilizadas conforme
+            forem confirmadas.
+        </p>
+
+        <div class="dungeon-info">
+
+            <div class="stat">
+                <span class="stat-label">Level recomendado</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-label">Jogadores</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-label">Requisito</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-label">Recompensas</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+        </div>
+
+        <div class="dungeon-actions">
+
+            <a href="#" class="dungeon-btn btn-main">
+                Ver Dungeon
+            </a>
+
+            <a href="#" class="dungeon-btn btn-secondary">
+                Recompensas
+            </a>
+
+        </div>
+
+    </div>
+
+</article>
+
+
+
+<!-- PRIMEAPES -->
+
+<article class="dungeon-card">
+
+    <div class="dungeon-image">
+        <img
+            src="img/primeapes.png"
+            alt="Primeapes"
+        >
+    </div>
+
+    <div class="dungeon-content">
+
+        <div class="dungeon-top">
+
+            <h3 class="dungeon-name">
+                Primeapes
+            </h3>
+
+            <span class="category">
+                A CONFIRMAR
+            </span>
+
+        </div>
+
+        <p class="dungeon-description">
+            Um desafio da Zona Dimensional relacionado aos
+            Primeapes. Mais informações serão adicionadas após
+            confirmação dentro do sistema.
+        </p>
+
+        <div class="dungeon-info">
+
+            <div class="stat">
+                <span class="stat-label">Level recomendado</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-label">Jogadores</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-label">Requisito</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-label">Recompensas</span>
+                <span class="stat-value">A confirmar</span>
+            </div>
+
+        </div>
+
+        <div class="dungeon-actions">
+
+            <a href="#" class="dungeon-btn btn-main">
+                Ver Dungeon
+            </a>
+
+            <a href="#" class="dungeon-btn btn-secondary">
+                Recompensas
+            </a>
+
+        </div>
+
+    </div>
+
+</article>
+
 
 </section>
 
 
 <div class="status-box">
 
-    <strong>📌 Sistema em desenvolvimento</strong>
+    <strong>📌 Conteúdo em atualização</strong>
 
     <p>
-        O sistema de Dungeons poderá receber novos desafios,
-        ajustes e conteúdos durante o desenvolvimento do Poké Valhalla.
-        Esta página será atualizada conforme novas informações
-        forem disponibilizadas.
+        Novas informações sobre níveis, quantidade de participantes,
+        requisitos, recompensas e novos desafios serão adicionadas à
+        Wiki conforme forem confirmadas no Poké Valhalla.
     </p>
 
 </div>
