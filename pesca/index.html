@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pesca | Poké Valhalla Wiki</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#05090f;
+    --panel:#0b121c;
+    --border:#26384c;
+    --blue:#24a8ff;
+    --text:#dbe6ef;
+    --muted:#8497a8;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 50% 0%,#10223a 0%,#07101b 30%,#05090f 70%);
+    color:var(--text);
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    height:82px;
+    background:rgba(5,10,17,.96);
+    border-bottom:1px solid #23364a;
+    display:flex;
+    align-items:center;
+    padding:0 45px;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    text-decoration:none;
+    color:white;
+}
+
+.brand img{
+    width:65px;
+    height:65px;
+    object-fit:contain;
+}
+
+.brand-text{
+    font-weight:bold;
+    font-size:20px;
+    letter-spacing:1px;
+}
+
+.brand-text span{
+    color:var(--blue);
+}
+
+nav{
+    margin-left:55px;
+    display:flex;
+    gap:28px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#aebdca;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:var(--blue);
+}
+
+/* CONTAINER */
+
+.container{
+    width:92%;
+    max-width:1180px;
+    margin:auto;
+    padding:45px 0 80px;
+}
+
+.back{
+    display:inline-block;
+    margin-bottom:25px;
+    color:#8298aa;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.back:hover{
+    color:var(--blue);
+}
+
+/* HERO */
+
+.hero{
+    border:1px solid #28445e;
+    border-radius:18px;
+    padding:45px;
+    background:
+        radial-gradient(circle at 80% 40%,rgba(36,168,255,.14),transparent 35%),
+        linear-gradient(120deg,#0b1724,#07101a);
+}
+
+.hero-icon{
+    font-size:58px;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    color:white;
+    font-size:42px;
+    margin-bottom:8px;
+}
+
+.hero h1 span{
+    color:var(--blue);
+}
+
+.hero-subtitle{
+    color:#54bfff;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.hero p{
+    color:#94a7b6;
+    max-width:750px;
+    line-height:1.75;
+    font-size:14px;
+}
+
+/* TITULOS */
+
+.section-title{
+    margin-top:45px;
+    margin-bottom:20px;
+}
+
+.section-title small{
+    color:var(--blue);
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.section-title h2{
+    color:white;
+    font-size:25px;
+    margin-top:6px;
+}
+
+/* INFO */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.info-card{
+    background:linear-gradient(145deg,#0e1824,#09121c);
+    border:1px solid #263b50;
+    border-radius:12px;
+    padding:25px;
+}
+
+.info-card h3{
+    color:#4fc0ff;
+    margin-bottom:10px;
+    font-size:17px;
+}
+
+.info-card p{
+    color:#8498aa;
+    font-size:13px;
+    line-height:1.7;
+}
+
+/* SIMULADOR */
+
+.fishing-wrapper{
+    display:grid;
+    grid-template-columns:1.25fr .75fr;
+    gap:20px;
+}
+
+.fishing-panel{
+    min-height:400px;
+    border:1px solid #245275;
+    border-radius:16px;
+    overflow:hidden;
+    position:relative;
+    background:
+        linear-gradient(to bottom,#0c2436 0%,#0b334b 47%,#075075 48%,#062d46 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.water{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:52%;
+    overflow:hidden;
+}
+
+.wave{
+    position:absolute;
+    width:140%;
+    height:45px;
+    left:-20%;
+    border-radius:50%;
+    border-top:2px solid rgba(120,211,255,.25);
+}
+
+.wave:nth-child(1){
+    top:35px;
+    animation:wave 4s linear infinite;
+}
+
+.wave:nth-child(2){
+    top:100px;
+    animation:wave 5s linear infinite reverse;
+}
+
+.wave:nth-child(3){
+    top:165px;
+    animation:wave 6s linear infinite;
+}
+
+@keyframes wave{
+    from{transform:translateX(-20px);}
+    to{transform:translateX(20px);}
+}
+
+.fishing-content{
+    position:relative;
+    z-index:5;
+    width:100%;
+    padding:25px;
+}
+
+.fishing-icon{
+    font-size:70px;
+    margin-bottom:15px;
+    animation:rod 1.8s ease-in-out infinite;
+}
+
+@keyframes rod{
+    0%,100%{transform:rotate(-4deg);}
+    50%{transform:rotate(5deg);}
+}
+
+.status{
+    color:white;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.status-detail{
+    color:#8cccec;
+    font-size:13px;
+    margin-top:8px;
+}
+
+.dots::after{
+    content:"";
+    animation:dots 1.5s infinite;
+}
+
+@keyframes dots{
+    0%{content:"";}
+    25%{content:".";}
+    50%{content:"..";}
+    75%,100%{content:"...";}
+}
+
+/* ENCONTRO */
+
+.catch-result{
+    display:none;
+}
+
+.catch-result.show{
+    display:block;
+    animation:appear .4s ease;
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:scale(.85);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.pokemon-placeholder{
+    width:120px;
+    height:120px;
+    margin:0 auto 15px;
+    border:2px dashed #5bbef3;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:50px;
+    background:rgba(3,14,24,.55);
+}
+
+.catch-result h3{
+    color:#fff;
+    font-size:23px;
+    margin-bottom:6px;
+}
+
+.catch-result p{
+    color:#8bcdf0;
+    font-size:13px;
+}
+
+/* PAINEL LATERAL */
+
+.skill-panel{
+    border:1px solid #263e52;
+    background:#09131e;
+    border-radius:16px;
+    padding:28px;
+}
+
+.skill-panel h3{
+    color:white;
+    margin-bottom:7px;
+}
+
+.skill-panel > p{
+    color:#8197a9;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.skill-demo{
+    margin-top:28px;
+    border:1px solid #1e3b51;
+    border-radius:10px;
+    padding:18px;
+    background:#07111a;
+}
+
+.skill-label{
+    display:flex;
+    justify-content:space-between;
+    color:#9db1c0;
+    font-size:12px;
+    margin-bottom:9px;
+}
+
+.progress{
+    height:9px;
+    background:#142433;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:68%;
+    background:linear-gradient(90deg,#087ac7,#2db6ff);
+    border-radius:20px;
+}
+
+.demo-warning{
+    margin-top:18px;
+    color:#657d90;
+    font-size:11px;
+    line-height:1.6;
+}
+
+/* EM ATUALIZAÇÃO */
+
+.update-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.update-card{
+    background:#09131e;
+    border:1px solid #243b50;
+    border-radius:11px;
+    padding:23px;
+}
+
+.update-card .icon{
+    font-size:28px;
+    margin-bottom:12px;
+}
+
+.update-card h3{
+    color:white;
+    font-size:15px;
+    margin-bottom:8px;
+}
+
+.update-card p{
+    color:#758b9d;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.pending{
+    display:inline-block;
+    margin-top:13px;
+    color:#5bbff4;
+    border:1px solid #255a79;
+    background:#0a2030;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:bold;
+}
+
+/* AVISO */
+
+.note{
+    margin-top:35px;
+    border-left:4px solid var(--blue);
+    background:#091722;
+    padding:20px 24px;
+    border-radius:7px;
+}
+
+.note strong{
+    color:#4fc0ff;
+}
+
+.note p{
+    color:#8196a7;
+    font-size:13px;
+    margin-top:7px;
+    line-height:1.6;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid #1e3041;
+    background:#050a10;
+    text-align:center;
+    padding:30px;
+    color:#5e7385;
+    font-size:13px;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    header{
+        padding:0 20px;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .fishing-wrapper{
+        grid-template-columns:1fr;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .update-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding:30px;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a href="../" class="brand">
+
+    <img src="../logo-valhalla.png.png" alt="Poké Valhalla">
+
+    <div class="brand-text">
+        POKÉ <span>VALHALLA</span>
+    </div>
+
+</a>
+
+<nav>
+    <a href="../">Início</a>
+    <a href="../pokedex/">Pokédex</a>
+    <a href="#">Mapa</a>
+    <a href="#">Sistemas</a>
+    <a href="../quests/">Quests</a>
+    <a href="#">Guias</a>
+</nav>
+
+</header>
+
+<main class="container">
+
+<a href="../" class="back">← Voltar para a página principal</a>
+
+<section class="hero">
+
+    <div class="hero-icon">🎣</div>
+
+    <h1>Sistema de <span>Pesca</span></h1>
+
+    <div class="hero-subtitle">
+        Lance sua vara e deixe a aventura começar.
+    </div>
+
+    <p>
+        O sistema de pesca de Poké Valhalla possui funcionamento automático.
+        Após iniciar a pesca, não é necessário clicar repetidamente para
+        continuar pescando. O treinador pode acompanhar a atividade enquanto
+        o sistema realiza novas tentativas automaticamente.
+    </p>
+
+</section>
+
+
+<div class="section-title">
+    <small>COMO FUNCIONA</small>
+    <h2>Pesque sem precisar clicar a cada tentativa</h2>
+</div>
+
+<section class="info-grid">
+
+    <div class="info-card">
+        <h3>🎣 Pesca automática</h3>
+
+        <p>
+            Depois de iniciar a pesca, o sistema continua a atividade
+            automaticamente, evitando a necessidade de repetir a ação
+            manualmente a cada tentativa.
+        </p>
+    </div>
+
+    <div class="info-card">
+        <h3>📈 Fishing Skill</h3>
+
+        <p>
+            A pesca possui uma skill própria. O jogador pode acompanhar
+            seu nível de Fishing e o progresso da habilidade pela
+            interface do jogo.
+        </p>
+    </div>
+
+</section>
+
+
+<div class="section-title">
+    <small>DEMONSTRAÇÃO</small>
+    <h2>Pesca automática</h2>
+</div>
+
+<section class="fishing-wrapper">
+
+    <div class="fishing-panel">
+
+        <div class="water">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+
+        <div class="fishing-content">
+
+            <div id="fishingState">
+
+                <div class="fishing-icon">🎣</div>
+
+                <div class="status">
+                    Pescando<span class="dots"></span>
+                </div>
+
+                <div class="status-detail">
+                    Aguardando uma fisgada
+                </div>
+
+            </div>
+
+
+            <div id="catchResult" class="catch-result">
+
+                <div class="pokemon-placeholder">
+                    ?
+                </div>
+
+                <h3>Pokémon encontrado!</h3>
+
+                <p>
+                    A pesca continuará automaticamente.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <aside class="skill-panel">
+
+        <h3>📈 Fishing Skill</h3>
+
+        <p>
+            A habilidade de pesca possui nível e progressão próprios
+            dentro do Poké Valhalla.
+        </p>
+
+        <div class="skill-demo">
+
+            <div class="skill-label">
+                <span>Fishing</span>
+                <span>Exemplo visual</span>
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar"></div>
+            </div>
+
+        </div>
+
+        <div class="demo-warning">
+            A barra acima é apenas uma representação visual da interface
+            e não corresponde ao nível real de nenhum jogador.
+        </div>
+
+    </aside>
+
+</section>
+
+
+<div class="section-title">
+    <small>EM ATUALIZAÇÃO</small>
+    <h2>Mais informações sobre a pesca</h2>
+</div>
+
+<section class="update-grid">
+
+    <div class="update-card">
+
+        <div class="icon">🐟</div>
+
+        <h3>Pokémon pescáveis</h3>
+
+        <p>
+            A relação de Pokémon que podem ser encontrados através
+            da pesca será adicionada após confirmação.
+        </p>
+
+        <span class="pending">EM ATUALIZAÇÃO</span>
+
+    </div>
+
+
+    <div class="update-card">
+
+        <div class="icon">🎣</div>
+
+        <h3>Varas de pesca</h3>
+
+        <p>
+            Varas disponíveis, diferenças e possíveis requisitos
+            serão documentados posteriormente.
+        </p>
+
+        <span class="pending">EM ATUALIZAÇÃO</span>
+
+    </div>
+
+
+    <div class="update-card">
+
+        <div class="icon">📊</div>
+
+        <h3>Progressão</h3>
+
+        <p>
+            Informações adicionais sobre níveis, progressão e
+            funcionamento da Fishing Skill serão acrescentadas
+            conforme forem confirmadas.
+        </p>
+
+        <span class="pending">EM ATUALIZAÇÃO</span>
+
+    </div>
+
+</section>
+
+
+<div class="note">
+
+    <strong>📌 Conteúdo em desenvolvimento</strong>
+
+    <p>
+        A Wiki Valhalla publicará somente informações confirmadas sobre
+        Pokémon pescáveis, requisitos, varas e demais características
+        do sistema.
+    </p>
+
+</div>
+
+</main>
+
+
+<footer>
+
+    <strong>Poké Valhalla Wiki</strong>
+
+    <br><br>
+
+    Explore. Descubra. Escreva sua história em Valhalla.
+
+</footer>
+
+
+<script>
+
+const fishingState = document.getElementById("fishingState");
+const catchResult = document.getElementById("catchResult");
+
+function startFishing(){
+
+    fishingState.style.display = "block";
+    catchResult.classList.remove("show");
+
+    setTimeout(showCatch, 4000);
+
+}
+
+function showCatch(){
+
+    fishingState.style.display = "none";
+    catchResult.classList.add("show");
+
+    setTimeout(startFishing, 2500);
+
+}
+
+startFishing();
+
+</script>
+
+</body>
+</html>
